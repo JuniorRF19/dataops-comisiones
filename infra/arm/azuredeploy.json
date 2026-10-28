@@ -1,0 +1,74 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "metadata": {
+    "description": "Infraestructura DataOps comisiones por ambiente: Data Lake Gen2 (contenedores raw y lake) + Azure Data Factory."
+  },
+  "parameters": {
+    "environment": {
+      "type": "string",
+      "allowedValues": ["dev", "qa", "prd"],
+      "metadata": { "description": "Ambiente a desplegar" }
+    },
+    "initials": {
+      "type": "string",
+      "minLength": 2,
+      "maxLength": 6,
+      "metadata": { "description": "Iniciales del estudiante (nomenclatura Sesión 3)" }
+    },
+    "location": {
+      "type": "string",
+      "defaultValue": "[resourceGroup().location]"
+    },
+    "deployDataFactory": {
+      "type": "bool",
+      "defaultValue": true
+    }
+  },
+  "variables": {
+    "storageAccountName": "[toLower(format('az{0}{1}dedlslake', parameters('initials'), parameters('environment')))]",
+    "dataFactoryName": "[format('az-{0}-{1}-de-dfc-etl', parameters('initials'), parameters('environment'))]",
+    "containers": ["raw", "lake"]
+  },
+  "resources": [
+    {
+      "type": "Microsoft.Storage/storageAccounts",
+      "apiVersion": "2023-01-01",
+      "name": "[variables('storageAccountName')]",
+      "location": "[parameters('location')]",
+      "sku": { "name": "Standard_LRS" },
+      "kind": "StorageV2",
+      "properties": {
+        "isHnsEnabled": true,
+        "minimumTlsVersion": "TLS1_2",
+        "allowBlobPublicAccess": false,
+        "supportsHttpsTrafficOnly": true
+      },
+      "tags": { "proyecto": "dataops-comisiones", "ambiente": "[parameters('environment')]" }
+    },
+    {
+      "copy": { "name": "containersCopy", "count": "[length(variables('containers'))]" },
+      "type": "Microsoft.Storage/storageAccounts/blobServices/containers",
+      "apiVersion": "2023-01-01",
+      "name": "[format('{0}/default/{1}', variables('storageAccountName'), variables('containers')[copyIndex()])]",
+      "dependsOn": [
+        "[resourceId('Microsoft.Storage/storageAccounts', variables('storageAccountName'))]"
+      ],
+      "properties": { "publicAccess": "None" }
+    },
+    {
+      "condition": "[parameters('deployDataFactory')]",
+      "type": "Microsoft.DataFactory/factories",
+      "apiVersion": "2018-06-01",
+      "name": "[variables('dataFactoryName')]",
+      "location": "[parameters('location')]",
+      "identity": { "type": "SystemAssigned" },
+      "properties": {},
+      "tags": { "proyecto": "dataops-comisiones", "ambiente": "[parameters('environment')]" }
+    }
+  ],
+  "outputs": {
+    "storageAccountName": { "type": "string", "value": "[variables('storageAccountName')]" },
+    "dataFactoryName": { "type": "string", "value": "[variables('dataFactoryName')]" }
+  }
+}

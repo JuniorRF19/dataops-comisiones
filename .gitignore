@@ -1,0 +1,15 @@
+# Secretos
+.env
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.ruff_cache/
+
+# Salidas locales
+out/
+reports/
+logs/
+artifacts/

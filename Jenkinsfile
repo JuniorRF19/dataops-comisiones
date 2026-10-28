@@ -110,7 +110,8 @@ pipeline {
 //   3) smoke test: lee el Parquet publicado y valida su contenido
 def deployTo(String envName) {
     withCredentials([usernamePassword(credentialsId: 'pg-dmc', usernameVariable: 'PG_USER', passwordVariable: 'PG_PASSWORD')]) {
-        withEnv(["DEPLOY_ENV=${envName}"]) {
+        // En el primer build los parámetros aún no existen como variables de entorno
+        withEnv(["DEPLOY_ENV=${envName}", "PERIODO=${params.PERIODO ?: '202610'}"]) {
             sh '''#!/bin/bash
                 set -euo pipefail
                 mkdir -p logs artifacts/${DEPLOY_ENV}

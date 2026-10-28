@@ -1,0 +1,42 @@
+# Jenkins Configuration as Code. Los valores ${...} vienen del archivo .env
+jenkins:
+  systemMessage: "DataOps Comisiones · CI/CD local (DEV → QA → PRD)"
+  numExecutors: 2
+  securityRealm:
+    local:
+      allowsSignup: false
+      users:
+        - id: "${JENKINS_ADMIN_ID}"
+          password: "${JENKINS_ADMIN_PASSWORD}"
+  authorizationStrategy:
+    loggedInUsersCanDoAnything:
+      allowAnonymousRead: false
+
+credentials:
+  system:
+    domainCredentials:
+      - credentials:
+          - usernamePassword:
+              scope: GLOBAL
+              id: "pg-dmc"
+              description: "PostgreSQL DMC rrhh (solo lectura)"
+              username: "${PG_USER}"
+              password: "${PG_PASSWORD}"
+
+jobs:
+  - script: >
+      pipelineJob('dataops-comisiones') {
+        description('CI/CD del pipeline de comisiones: lint, tests, ARM, build y despliegue DEV → QA → PRD')
+        definition {
+          cpsScm {
+            scm {
+              git {
+                remote { url('${GITHUB_REPO_URL}') }
+                branch('*/main')
+              }
+            }
+            scriptPath('Jenkinsfile')
+            lightweight(true)
+          }
+        }
+      }

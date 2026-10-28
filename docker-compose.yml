@@ -1,0 +1,53 @@
+# Plataforma local: Azurite (Blob Storage / Data Lake emulado) + Jenkins (CI/CD)
+#   docker compose up -d --build
+#   Jenkins: http://localhost:8080   Azurite Blob: http://localhost:10000
+name: dataops
+
+services:
+  azurite:
+    image: mcr.microsoft.com/azure-storage/azurite:3.35.0
+    container_name: azurite
+    command: azurite-blob --blobHost 0.0.0.0 --blobPort 10000 --location /data --loose --skipApiVersionCheck
+    ports:
+      - "10000:10000"
+    volumes:
+      - azurite_data:/data
+    restart: unless-stopped
+
+  jenkins:
+    build: ./jenkins
+    container_name: jenkins
+    user: root                      # necesario para usar /var/run/docker.sock (laboratorio local)
+    env_file: .env
+    environment:
+      CASC_JENKINS_CONFIG: /usr/share/jenkins/ref/casc.yaml
+      JAVA_OPTS: -Djenkins.install.runSetupWizard=false
+    ports:
+      - "8080:8080"
+    volumes:
+      - jenkins_home:/var/jenkins_home
+      - /var/run/docker.sock:/var/run/docker.sock
+    depends_on:
+      - azurite
+    restart: unless-stopped
+
+  # Ejecución manual del pipeline fuera de Jenkins:
+  #   docker compose run --rm app python -m app.pipeline --env dev
+  app:
+    build:
+      context: .
+      target: runtime
+    env_file: .env
+    environment:
+      AZURE_STORAGE_CONNECTION_STRING: "DefaultEndpointsProtocol=http;AccountName=devstoreaccount1;AccountKey=Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw==;BlobEndpoint=http://azurite:10000/devstoreaccount1;"
+    depends_on:
+      - azurite
+    profiles: ["manual"]
+
+volumes:
+  azurite_data:
+  jenkins_home:
+
+networks:
+  default:
+    name: dataops-net

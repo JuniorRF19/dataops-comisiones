@@ -1,0 +1,18 @@
+# Configuración del ambiente DEV. Los secretos van por variables de entorno.
+env: dev
+periodo: "202610"
+
+db:
+  schema: rrhh
+  table: empleado
+
+storage:
+  raw_container: raw-dev        # "Blob Storage": zona de aterrizaje del CSV
+  lake_container: lake-dev      # "Data Lake": zona de salida
+  csv_blob: "comisiones/ComisionEmpleados_V1_{periodo}.csv"
+  parquet_blob: "gold/comisiones/periodo={periodo}/comisiones_{periodo}.parquet"
+  excel_blob: "gold/comisiones/periodo={periodo}/comisiones_{periodo}.xlsx"
+
+quality:
+  min_rows: 1
+  strict: false            # en DEV solo se reportan las reglas incumplidas

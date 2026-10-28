@@ -1,0 +1,18 @@
+# Configuración del ambiente PRD. Los secretos van por variables de entorno.
+env: prd
+periodo: "202610"
+
+db:
+  schema: rrhh
+  table: empleado
+
+storage:
+  raw_container: raw-prd        # "Blob Storage": zona de aterrizaje del CSV
+  lake_container: lake-prd      # "Data Lake": zona de salida
+  csv_blob: "comisiones/ComisionEmpleados_V1_{periodo}.csv"
+  parquet_blob: "gold/comisiones/periodo={periodo}/comisiones_{periodo}.parquet"
+  excel_blob: "gold/comisiones/periodo={periodo}/comisiones_{periodo}.xlsx"
+
+quality:
+  min_rows: 1
+  strict: true            # si falla una regla, el despliegue se detiene

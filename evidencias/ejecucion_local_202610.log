@@ -1,0 +1,53 @@
+2026-10-28 00:27:06,278 | INFO    | Contenedor raw-dev ya existe
+2026-10-28 00:27:06,282 | INFO    | Contenedor lake-dev ya existe
+2026-10-28 00:27:06,299 | INFO    | Subido ComisionEmpleados_V1_202610.csv -> raw-dev/comisiones/ComisionEmpleados_V1_202610.csv
+2026-10-28 00:27:07,169 | INFO    | === Pipeline comisiones | env=dev | periodo=202610 ===
+2026-10-28 00:27:08,619 | INFO    | Extract SQL  : 48 filas de rrhh.empleado
+2026-10-28 00:27:08,651 | INFO    | Extract Blob : 34 filas de raw-dev/comisiones/ComisionEmpleados_V1_202610.csv
+2026-10-28 00:27:08,652 | WARNING | IDs del CSV sin empleado en BD (se descartan): [np.int64(4)]
+2026-10-28 00:27:08,652 | INFO    | Empleados de BD sin comisión en el periodo: [np.int64(6), np.int64(7), np.int64(8), np.int64(38), np.int64(39), np.int64(40), np.int64(41), np.int64(42), np.int64(43), np.int64(44), np.int64(45), np.int64(46), np.int64(47), np.int64(48), np.int64(50)]
+2026-10-28 00:27:08,656 | INFO    | Transform    : 33 filas tras JOIN por empleado_id
+2026-10-28 00:27:08,659 | INFO    | Quality      : OK (todas las reglas cumplidas)
+2026-10-28 00:27:08,825 | INFO    | Load Lake    : lake-dev/gold/comisiones/periodo=202610/comisiones_202610.parquet (7894 bytes)
+2026-10-28 00:27:08,835 | INFO    | Load Lake    : lake-dev/gold/comisiones/periodo=202610/comisiones_202610.xlsx (7098 bytes)
+2026-10-28 00:27:08,837 | INFO    | Resumen      : salario_total suma 436905.20
+2026-10-28 00:27:09,694 | INFO    | Contenedor raw-qa ya existe
+2026-10-28 00:27:09,698 | INFO    | Contenedor lake-qa ya existe
+2026-10-28 00:27:09,718 | INFO    | Subido ComisionEmpleados_V1_202610.csv -> raw-qa/comisiones/ComisionEmpleados_V1_202610.csv
+2026-10-28 00:27:10,524 | INFO    | === Pipeline comisiones | env=qa | periodo=202610 ===
+2026-10-28 00:27:12,686 | INFO    | Extract SQL  : 48 filas de rrhh.empleado
+2026-10-28 00:27:12,729 | INFO    | Extract Blob : 34 filas de raw-qa/comisiones/ComisionEmpleados_V1_202610.csv
+2026-10-28 00:27:12,730 | WARNING | IDs del CSV sin empleado en BD (se descartan): [np.int64(4)]
+2026-10-28 00:27:12,731 | INFO    | Empleados de BD sin comisión en el periodo: [np.int64(6), np.int64(7), np.int64(8), np.int64(38), np.int64(39), np.int64(40), np.int64(41), np.int64(42), np.int64(43), np.int64(44), np.int64(45), np.int64(46), np.int64(47), np.int64(48), np.int64(50)]
+2026-10-28 00:27:12,735 | INFO    | Transform    : 33 filas tras JOIN por empleado_id
+2026-10-28 00:27:12,737 | INFO    | Quality      : OK (todas las reglas cumplidas)
+2026-10-28 00:27:12,890 | INFO    | Load Lake    : lake-qa/gold/comisiones/periodo=202610/comisiones_202610.parquet (7894 bytes)
+2026-10-28 00:27:12,906 | INFO    | Load Lake    : lake-qa/gold/comisiones/periodo=202610/comisiones_202610.xlsx (7094 bytes)
+2026-10-28 00:27:12,909 | INFO    | Resumen      : salario_total suma 436905.20
+2026-10-28 00:27:13,993 | INFO    | Contenedor raw-prd ya existe
+2026-10-28 00:27:13,997 | INFO    | Contenedor lake-prd ya existe
+2026-10-28 00:27:14,005 | INFO    | Subido ComisionEmpleados_V1_202610.csv -> raw-prd/comisiones/ComisionEmpleados_V1_202610.csv
+2026-10-28 00:27:14,858 | INFO    | === Pipeline comisiones | env=prd | periodo=202610 ===
+2026-10-28 00:27:17,521 | INFO    | Extract SQL  : 48 filas de rrhh.empleado
+2026-10-28 00:27:17,568 | INFO    | Extract Blob : 34 filas de raw-prd/comisiones/ComisionEmpleados_V1_202610.csv
+2026-10-28 00:27:17,573 | WARNING | IDs del CSV sin empleado en BD (se descartan): [np.int64(4)]
+2026-10-28 00:27:17,573 | INFO    | Empleados de BD sin comisión en el periodo: [np.int64(6), np.int64(7), np.int64(8), np.int64(38), np.int64(39), np.int64(40), np.int64(41), np.int64(42), np.int64(43), np.int64(44), np.int64(45), np.int64(46), np.int64(47), np.int64(48), np.int64(50)]
+2026-10-28 00:27:17,594 | INFO    | Transform    : 33 filas tras JOIN por empleado_id
+2026-10-28 00:27:17,607 | INFO    | Quality      : OK (todas las reglas cumplidas)
+2026-10-28 00:27:18,457 | INFO    | Load Lake    : lake-prd/gold/comisiones/periodo=202610/comisiones_202610.parquet (7894 bytes)
+2026-10-28 00:27:18,483 | INFO    | Load Lake    : lake-prd/gold/comisiones/periodo=202610/comisiones_202610.xlsx (7097 bytes)
+2026-10-28 00:27:18,488 | INFO    | Resumen      : salario_total suma 436905.20
+2026-10-28 00:27:19,629 | INFO    | Parquet lake-prd/gold/comisiones/periodo=202610/comisiones_202610.parquet: 33 filas, 10 columnas
+2026-10-28 00:27:19,629 | INFO    | Columnas: ['periodo', 'empleado_id', 'nom_empleado', 'ape_empleado', 'cod_cargo', 'cod_departamento', 'mnt_salario', 'comision', 'salario_total', 'fecha_proceso']
+2026-10-28 00:27:19,634 | INFO    | Verificación PRD OK
+periodo  empleado_id nom_empleado ape_empleado cod_cargo cod_departamento  mnt_salario  comision  salario_total             fecha_proceso
+ 202610            1          Ana        Pérez    CAR004           DEP004      1800.00      9000       10800.00 2026-10-28 05:27:17+00:00
+ 202610            2       Carlos        López    CAR002           DEP002      2500.50      8250       10750.50 2026-10-28 05:27:17+00:00
+ 202610            3        Sofía     Martínez    CAR003           DEP003      2200.75     10500       12700.75 2026-10-28 05:27:17+00:00
+ 202610            5        Elena    Rodríguez    CAR005           DEP005      2000.20      9750       11750.20 2026-10-28 05:27:17+00:00
+ 202610            9    Valentina         Ruiz    CAR001           DEP001      4200.50     10200       14400.50 2026-10-28 05:27:17+00:00
+ 202610           10    Sebastián       Castro    CAR005           DEP005      1950.40      9000       10950.40 2026-10-28 05:27:17+00:00
+ 202610           11      Luciana       Flores    CAR004           DEP004      1850.10     10800       12650.10 2026-10-28 05:27:17+00:00
+ 202610           12       Andrés         Soto    CAR002           DEP002      2550.60     10350       12900.60 2026-10-28 05:27:17+00:00
+ 202610           13      Mariana        Rojas    CAR003           DEP003      2250.30     11700       13950.30 2026-10-28 05:27:17+00:00
+ 202610           14        Diego         Luna    CAR001           DEP001      4100.70      9750       13850.70 2026-10-28 05:27:17+00:00

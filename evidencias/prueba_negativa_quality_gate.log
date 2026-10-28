@@ -1,0 +1,35 @@
+### DEV (no estricto) con CSV inválido 209912
+2026-10-28 00:27:29,376 | INFO    | Contenedor raw-dev ya existe
+2026-10-28 00:27:29,380 | INFO    | Contenedor lake-dev ya existe
+2026-10-28 00:27:29,400 | INFO    | Subido ComisionEmpleados_V1_209912.csv -> raw-dev/comisiones/ComisionEmpleados_V1_209912.csv
+2026-10-28 00:27:30,209 | INFO    | === Pipeline comisiones | env=dev | periodo=209912 ===
+2026-10-28 00:27:31,937 | INFO    | Extract SQL  : 48 filas de rrhh.empleado
+2026-10-28 00:27:31,975 | INFO    | Extract Blob : 5 filas de raw-dev/comisiones/ComisionEmpleados_V1_209912.csv
+2026-10-28 00:27:31,975 | WARNING | IDs del CSV sin empleado en BD (se descartan): [4]
+2026-10-28 00:27:31,976 | INFO    | Empleados de BD sin comisión en el periodo: [5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 50]
+2026-10-28 00:27:31,980 | INFO    | Transform    : 4 filas tras JOIN por empleado_id
+2026-10-28 00:27:31,982 | ERROR   | Quality      : 1 valores nulos en 'comision'
+2026-10-28 00:27:31,982 | ERROR   | Quality      : 1 valores nulos en 'salario_total'
+2026-10-28 00:27:31,982 | ERROR   | Quality      : empleado_id duplicados: [3]
+2026-10-28 00:27:31,982 | ERROR   | Quality      : Comisiones negativas para empleado_id: [2]
+2026-10-28 00:27:31,982 | WARNING | Quality      : modo no estricto en dev, se continúa
+2026-10-28 00:27:32,160 | INFO    | Load Lake    : lake-dev/gold/comisiones/periodo=209912/comisiones_209912.parquet (6535 bytes)
+2026-10-28 00:27:32,167 | INFO    | Load Lake    : lake-dev/gold/comisiones/periodo=209912/comisiones_209912.xlsx (5290 bytes)
+2026-10-28 00:27:32,167 | INFO    | Resumen      : salario_total suma 25501.25
+exit code DEV = 0
+### QA (estricto) con CSV inválido 209912
+2026-10-28 00:27:33,049 | INFO    | Contenedor raw-qa ya existe
+2026-10-28 00:27:33,055 | INFO    | Contenedor lake-qa ya existe
+2026-10-28 00:27:33,065 | INFO    | Subido ComisionEmpleados_V1_209912.csv -> raw-qa/comisiones/ComisionEmpleados_V1_209912.csv
+2026-10-28 00:27:33,924 | INFO    | === Pipeline comisiones | env=qa | periodo=209912 ===
+2026-10-28 00:27:36,583 | INFO    | Extract SQL  : 48 filas de rrhh.empleado
+2026-10-28 00:27:36,615 | INFO    | Extract Blob : 5 filas de raw-qa/comisiones/ComisionEmpleados_V1_209912.csv
+2026-10-28 00:27:36,618 | WARNING | IDs del CSV sin empleado en BD (se descartan): [4]
+2026-10-28 00:27:36,618 | INFO    | Empleados de BD sin comisión en el periodo: [5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 50]
+2026-10-28 00:27:36,637 | INFO    | Transform    : 4 filas tras JOIN por empleado_id
+2026-10-28 00:27:36,649 | ERROR   | Quality      : 1 valores nulos en 'comision'
+2026-10-28 00:27:36,649 | ERROR   | Quality      : 1 valores nulos en 'salario_total'
+2026-10-28 00:27:36,650 | ERROR   | Quality      : empleado_id duplicados: [3]
+2026-10-28 00:27:36,650 | ERROR   | Quality      : Comisiones negativas para empleado_id: [2]
+2026-10-28 00:27:36,650 | ERROR   | QUALITY GATE FALLIDO: 4 regla(s) de calidad incumplidas
+exit code QA = 2

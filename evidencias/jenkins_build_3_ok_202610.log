@@ -1,0 +1,414 @@
+Started by user admin
+Started by an SCM change
+Checking out git git://localhost:9420/dataops-comisiones.git into /var/jenkins_home/workspace/test-local@script/74d15534e93c1df0a36dc4596afb82d1cbb21fef41552c2545713b25cb7a509a to read Jenkinsfile
+The recommended git tool is: NONE
+No credentials specified
+ > git rev-parse --resolve-git-dir /var/jenkins_home/workspace/test-local@script/74d15534e93c1df0a36dc4596afb82d1cbb21fef41552c2545713b25cb7a509a/.git # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url git://localhost:9420/dataops-comisiones.git # timeout=10
+Fetching upstream changes from git://localhost:9420/dataops-comisiones.git
+ > git --version # timeout=10
+ > git --version # 'git version 2.47.3'
+ > git fetch --tags --force --progress -- git://localhost:9420/dataops-comisiones.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git rev-parse refs/remotes/origin/main^{commit} # timeout=10
+Checking out Revision 4aaf87a967e221c4cbf107430e76f76c48d00131 (refs/remotes/origin/main)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f 4aaf87a967e221c4cbf107430e76f76c48d00131 # timeout=10
+Commit message: "fix(ci): pasar PERIODO explícitamente al despliegue (primer build sin parámetros)"
+ > git rev-list --no-walk d95d40acdf4377904139be62d6d315af001e7160 # timeout=10
+[Pipeline] Start of Pipeline
+[Pipeline] node
+Running on Jenkins in /var/jenkins_home/workspace/test-local
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Declarative: Checkout SCM)
+[Pipeline] checkout
+The recommended git tool is: NONE
+No credentials specified
+ > git rev-parse --resolve-git-dir /var/jenkins_home/workspace/test-local/.git # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url git://localhost:9420/dataops-comisiones.git # timeout=10
+Fetching upstream changes from git://localhost:9420/dataops-comisiones.git
+ > git --version # timeout=10
+ > git --version # 'git version 2.47.3'
+ > git fetch --tags --force --progress -- git://localhost:9420/dataops-comisiones.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git rev-parse refs/remotes/origin/main^{commit} # timeout=10
+Checking out Revision 4aaf87a967e221c4cbf107430e76f76c48d00131 (refs/remotes/origin/main)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f 4aaf87a967e221c4cbf107430e76f76c48d00131 # timeout=10
+Commit message: "fix(ci): pasar PERIODO explícitamente al despliegue (primer build sin parámetros)"
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] timeout
+Timeout set to expire in 30 min
+[Pipeline] {
+[Pipeline] timestamps
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (CI · Checkout)
+[Pipeline] checkout
+[2026-10-28T05:35:04.957Z] The recommended git tool is: NONE
+[2026-10-28T05:35:04.957Z] No credentials specified
+[2026-10-28T05:35:04.957Z]  > git rev-parse --resolve-git-dir /var/jenkins_home/workspace/test-local/.git # timeout=10
+[2026-10-28T05:35:04.959Z] Fetching changes from the remote Git repository
+[2026-10-28T05:35:04.960Z]  > git config remote.origin.url git://localhost:9420/dataops-comisiones.git # timeout=10
+[2026-10-28T05:35:04.962Z] Fetching upstream changes from git://localhost:9420/dataops-comisiones.git
+[2026-10-28T05:35:04.962Z]  > git --version # timeout=10
+[2026-10-28T05:35:04.964Z]  > git --version # 'git version 2.47.3'
+[2026-10-28T05:35:04.964Z]  > git fetch --tags --force --progress -- git://localhost:9420/dataops-comisiones.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+[2026-10-28T05:35:05.020Z]  > git rev-parse refs/remotes/origin/main^{commit} # timeout=10
+[2026-10-28T05:35:05.025Z] Checking out Revision 4aaf87a967e221c4cbf107430e76f76c48d00131 (refs/remotes/origin/main)
+[2026-10-28T05:35:05.026Z]  > git config core.sparsecheckout # timeout=10
+[2026-10-28T05:35:05.029Z]  > git checkout -f 4aaf87a967e221c4cbf107430e76f76c48d00131 # timeout=10
+[2026-10-28T05:35:05.036Z] Commit message: "fix(ci): pasar PERIODO explícitamente al despliegue (primer build sin parámetros)"
+[Pipeline] sh
+[2026-10-28T05:35:05.328Z] + git log -1 --pretty=Commit %h · %an · %s
+[2026-10-28T05:35:05.328Z] Commit 4aaf87a · Junior Rojas · fix(ci): pasar PERIODO explícitamente al despliegue (primer build sin parámetros)
+[Pipeline] sh
+[2026-10-28T05:35:05.639Z] + docker --version
+[2026-10-28T05:35:05.639Z] Docker version 29.9.2, build a82e528
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (CI · Lint, ARM y Unit tests)
+[Pipeline] sh
+[2026-10-28T05:35:06.100Z] + docker build --target test -t dataops-comisiones:test-3 .
+[2026-10-28T05:35:06.100Z] #0 building with "default" instance using docker driver
+[2026-10-28T05:35:06.100Z] 
+[2026-10-28T05:35:06.100Z] #1 [internal] load build definition from Dockerfile
+[2026-10-28T05:35:06.350Z] #1 transferring dockerfile: 1.04kB done
+[2026-10-28T05:35:06.350Z] #1 DONE 0.0s
+[2026-10-28T05:35:06.350Z] 
+[2026-10-28T05:35:06.350Z] #2 [internal] load metadata for docker.io/library/python:3.11-slim
+[2026-10-28T05:35:06.601Z] #2 DONE 0.4s
+[2026-10-28T05:35:06.601Z] 
+[2026-10-28T05:35:06.601Z] #3 [internal] load .dockerignore
+[2026-10-28T05:35:06.601Z] #3 transferring context: 2B done
+[2026-10-28T05:35:06.601Z] #3 DONE 0.0s
+[2026-10-28T05:35:06.601Z] 
+[2026-10-28T05:35:06.601Z] #4 [internal] load build context
+[2026-10-28T05:35:06.601Z] #4 transferring context: 5.11kB 0.0s done
+[2026-10-28T05:35:06.601Z] #4 DONE 0.0s
+[2026-10-28T05:35:06.601Z] 
+[2026-10-28T05:35:06.601Z] #5 [base 1/9] FROM docker.io/library/python:3.11-slim@sha256:96909ccf1d448a93a966e9fc47a607781b0f22975f3dc17a4cec879600d0a827
+[2026-10-28T05:35:06.601Z] #5 resolve docker.io/library/python:3.11-slim@sha256:96909ccf1d448a93a966e9fc47a607781b0f22975f3dc17a4cec879600d0a827 0.0s done
+[2026-10-28T05:35:06.601Z] #5 DONE 0.0s
+[2026-10-28T05:35:06.601Z] 
+[2026-10-28T05:35:06.601Z] #6 [base 5/9] COPY app/ app/
+[2026-10-28T05:35:06.601Z] #6 CACHED
+[2026-10-28T05:35:06.601Z] 
+[2026-10-28T05:35:06.601Z] #7 [test 1/3] COPY requirements-dev.txt pyproject.toml ./
+[2026-10-28T05:35:06.601Z] #7 CACHED
+[2026-10-28T05:35:06.601Z] 
+[2026-10-28T05:35:06.601Z] #8 [base 2/9] WORKDIR /opt/dataops
+[2026-10-28T05:35:06.601Z] #8 CACHED
+[2026-10-28T05:35:06.601Z] 
+[2026-10-28T05:35:06.601Z] #9 [base 7/9] COPY data/ data/
+[2026-10-28T05:35:06.601Z] #9 CACHED
+[2026-10-28T05:35:06.601Z] 
+[2026-10-28T05:35:06.601Z] #10 [test 2/3] RUN pip install --no-cache-dir -r requirements-dev.txt
+[2026-10-28T05:35:06.601Z] #10 CACHED
+[2026-10-28T05:35:06.601Z] 
+[2026-10-28T05:35:06.601Z] #11 [base 3/9] COPY app/requirements.txt app/requirements.txt
+[2026-10-28T05:35:06.601Z] #11 CACHED
+[2026-10-28T05:35:06.601Z] 
+[2026-10-28T05:35:06.601Z] #12 [base 6/9] COPY config/ config/
+[2026-10-28T05:35:06.601Z] #12 CACHED
+[2026-10-28T05:35:06.601Z] 
+[2026-10-28T05:35:06.601Z] #13 [base 9/9] COPY infra/ infra/
+[2026-10-28T05:35:06.601Z] #13 CACHED
+[2026-10-28T05:35:06.601Z] 
+[2026-10-28T05:35:06.601Z] #14 [base 8/9] COPY scripts/ scripts/
+[2026-10-28T05:35:06.601Z] #14 CACHED
+[2026-10-28T05:35:06.601Z] 
+[2026-10-28T05:35:06.601Z] #15 [base 4/9] RUN pip install --no-cache-dir -r app/requirements.txt
+[2026-10-28T05:35:06.601Z] #15 CACHED
+[2026-10-28T05:35:06.601Z] 
+[2026-10-28T05:35:06.601Z] #16 [test 3/3] COPY tests/ tests/
+[2026-10-28T05:35:06.601Z] #16 CACHED
+[2026-10-28T05:35:06.601Z] 
+[2026-10-28T05:35:06.601Z] #17 exporting to image
+[2026-10-28T05:35:06.601Z] #17 exporting layers done
+[2026-10-28T05:35:06.601Z] #17 exporting manifest sha256:d95a6c8ea65428bfa601e366bc48c72dc24d1600a8b8876d39d299fc5dd81b1a done
+[2026-10-28T05:35:06.601Z] #17 exporting config sha256:22c01bf7119a3116e21b5a20bc9f20ccea002533ec155d524a6852b627c6e5f6 done
+[2026-10-28T05:35:06.601Z] #17 exporting attestation manifest sha256:9bc7b1e6c3d7ff83c4a9838dde46696e749e853874b1a035a4e77ea07a4fda85
+[2026-10-28T05:35:06.852Z] #17 exporting attestation manifest sha256:9bc7b1e6c3d7ff83c4a9838dde46696e749e853874b1a035a4e77ea07a4fda85 0.0s done
+[2026-10-28T05:35:06.852Z] #17 exporting manifest list sha256:fb8761a8de35d6c7842e7343044e3daec941077c59f898b18961b9d2d899586c 0.0s done
+[2026-10-28T05:35:06.852Z] #17 naming to docker.io/library/dataops-comisiones:test-3 done
+[2026-10-28T05:35:06.852Z] #17 unpacking to docker.io/library/dataops-comisiones:test-3
+[2026-10-28T05:35:06.852Z] #17 unpacking to docker.io/library/dataops-comisiones:test-3 0.2s done
+[2026-10-28T05:35:07.103Z] #17 DONE 0.3s
+[Pipeline] sh
+[2026-10-28T05:35:07.416Z] All checks passed!
+[2026-10-28T05:35:07.667Z] [dev] Storage Account: azdmcdevdedlslake
+[2026-10-28T05:35:07.667Z] [qa] Storage Account: azdmcqadedlslake
+[2026-10-28T05:35:07.667Z] [prd] Storage Account: azdmcprddedlslake
+[2026-10-28T05:35:07.667Z] Plantillas ARM válidas
+[2026-10-28T05:35:07.918Z] ============================= test session starts ==============================
+[2026-10-28T05:35:07.918Z] platform linux -- Python 3.11.18, pytest-8.3.4, pluggy-1.7.0 -- /usr/local/bin/python3.11
+[2026-10-28T05:35:07.918Z] cachedir: .pytest_cache
+[2026-10-28T05:35:07.918Z] rootdir: /opt/dataops
+[2026-10-28T05:35:07.918Z] configfile: pyproject.toml
+[2026-10-28T05:35:07.918Z] testpaths: tests
+[2026-10-28T05:35:08.168Z] collecting ... collected 17 items
+[2026-10-28T05:35:08.168Z] 
+[2026-10-28T05:35:08.168Z] tests/test_quality.py::test_good_data_passes PASSED                      [  5%]
+[2026-10-28T05:35:08.169Z] tests/test_quality.py::test_empty_fails PASSED                           [ 11%]
+[2026-10-28T05:35:08.169Z] tests/test_quality.py::test_duplicate_ids PASSED                         [ 17%]
+[2026-10-28T05:35:08.169Z] tests/test_quality.py::test_negative_commission PASSED                   [ 23%]
+[2026-10-28T05:35:08.169Z] tests/test_quality.py::test_null_commission PASSED                       [ 29%]
+[2026-10-28T05:35:08.169Z] tests/test_quality.py::test_wrong_total PASSED                           [ 35%]
+[2026-10-28T05:35:08.169Z] tests/test_quality.py::test_missing_columns PASSED                       [ 41%]
+[2026-10-28T05:35:08.169Z] tests/test_transform.py::test_normalize_column[Comisi\xf3n-comision] PASSED [ 47%]
+[2026-10-28T05:35:08.169Z] tests/test_transform.py::test_normalize_column[Nombre y Apellido-nombre_y_apellido] PASSED [ 52%]
+[2026-10-28T05:35:08.169Z] tests/test_transform.py::test_normalize_column[ empleado_id -empleado_id] PASSED [ 58%]
+[2026-10-28T05:35:08.169Z] tests/test_transform.py::test_read_csv_any_encoding[utf-8] PASSED        [ 64%]
+[2026-10-28T05:35:08.169Z] tests/test_transform.py::test_read_csv_any_encoding[utf-8-sig] PASSED    [ 70%]
+[2026-10-28T05:35:08.169Z] tests/test_transform.py::test_read_csv_any_encoding[latin-1] PASSED      [ 76%]
+[2026-10-28T05:35:08.169Z] tests/test_transform.py::test_read_csv_missing_column PASSED             [ 82%]
+[2026-10-28T05:35:08.169Z] tests/test_transform.py::test_join_and_salario_total PASSED              [ 88%]
+[2026-10-28T05:35:08.169Z] tests/test_transform.py::test_salario_total_accepts_decimal PASSED       [ 94%]
+[2026-10-28T05:35:08.169Z] tests/test_transform.py::test_output_columns PASSED                      [100%]
+[2026-10-28T05:35:08.169Z] 
+[2026-10-28T05:35:08.169Z] -------------- generated xml file: /opt/dataops/reports/junit.xml --------------
+[2026-10-28T05:35:08.169Z] ============================== 17 passed in 0.35s ==============================
+Post stage
+[Pipeline] junit
+[2026-10-28T05:35:08.456Z] Recording test results
+[2026-10-28T05:35:08.466Z] [Checks API] No suitable checks publisher found.
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (CI · Build imagen)
+[Pipeline] sh
+[2026-10-28T05:35:08.889Z] + docker build --target runtime -t dataops-comisiones:3 -t dataops-comisiones:latest .
+[2026-10-28T05:35:09.141Z] #0 building with "default" instance using docker driver
+[2026-10-28T05:35:09.141Z] 
+[2026-10-28T05:35:09.141Z] #1 [internal] load build definition from Dockerfile
+[2026-10-28T05:35:09.141Z] #1 transferring dockerfile: 1.04kB done
+[2026-10-28T05:35:09.141Z] #1 DONE 0.0s
+[2026-10-28T05:35:09.141Z] 
+[2026-10-28T05:35:09.141Z] #2 [internal] load metadata for docker.io/library/python:3.11-slim
+[2026-10-28T05:35:09.392Z] #2 DONE 0.6s
+[2026-10-28T05:35:09.643Z] 
+[2026-10-28T05:35:09.643Z] #3 [internal] load .dockerignore
+[2026-10-28T05:35:09.643Z] #3 transferring context: 2B done
+[2026-10-28T05:35:09.643Z] #3 DONE 0.0s
+[2026-10-28T05:35:09.643Z] 
+[2026-10-28T05:35:09.643Z] #4 [internal] load build context
+[2026-10-28T05:35:09.643Z] #4 transferring context: 867B done
+[2026-10-28T05:35:09.643Z] #4 DONE 0.0s
+[2026-10-28T05:35:09.643Z] 
+[2026-10-28T05:35:09.643Z] #5 [base 1/9] FROM docker.io/library/python:3.11-slim@sha256:96909ccf1d448a93a966e9fc47a607781b0f22975f3dc17a4cec879600d0a827
+[2026-10-28T05:35:09.643Z] #5 resolve docker.io/library/python:3.11-slim@sha256:96909ccf1d448a93a966e9fc47a607781b0f22975f3dc17a4cec879600d0a827 0.0s done
+[2026-10-28T05:35:09.643Z] #5 DONE 0.0s
+[2026-10-28T05:35:09.643Z] 
+[2026-10-28T05:35:09.643Z] #6 [base 2/9] WORKDIR /opt/dataops
+[2026-10-28T05:35:09.643Z] #6 CACHED
+[2026-10-28T05:35:09.643Z] 
+[2026-10-28T05:35:09.643Z] #7 [base 3/9] COPY app/requirements.txt app/requirements.txt
+[2026-10-28T05:35:09.643Z] #7 CACHED
+[2026-10-28T05:35:09.643Z] 
+[2026-10-28T05:35:09.643Z] #8 [base 7/9] COPY data/ data/
+[2026-10-28T05:35:09.643Z] #8 CACHED
+[2026-10-28T05:35:09.643Z] 
+[2026-10-28T05:35:09.643Z] #9 [base 8/9] COPY scripts/ scripts/
+[2026-10-28T05:35:09.643Z] #9 CACHED
+[2026-10-28T05:35:09.643Z] 
+[2026-10-28T05:35:09.643Z] #10 [base 4/9] RUN pip install --no-cache-dir -r app/requirements.txt
+[2026-10-28T05:35:09.643Z] #10 CACHED
+[2026-10-28T05:35:09.643Z] 
+[2026-10-28T05:35:09.643Z] #11 [base 6/9] COPY config/ config/
+[2026-10-28T05:35:09.643Z] #11 CACHED
+[2026-10-28T05:35:09.643Z] 
+[2026-10-28T05:35:09.643Z] #12 [base 5/9] COPY app/ app/
+[2026-10-28T05:35:09.643Z] #12 CACHED
+[2026-10-28T05:35:09.643Z] 
+[2026-10-28T05:35:09.643Z] #13 [base 9/9] COPY infra/ infra/
+[2026-10-28T05:35:09.643Z] #13 CACHED
+[2026-10-28T05:35:09.643Z] 
+[2026-10-28T05:35:09.643Z] #14 exporting to image
+[2026-10-28T05:35:09.643Z] #14 exporting layers done
+[2026-10-28T05:35:09.643Z] #14 exporting manifest sha256:7775f8d2ff6067c0b98ac6ac92cab807fe17591480c9516ebe13e6e96d9ede68 done
+[2026-10-28T05:35:09.643Z] #14 exporting config sha256:e84d60fc1aa9c49b05206bda6026528efb2185267e8ed376ec3aa010e4159197 done
+[2026-10-28T05:35:09.643Z] #14 exporting attestation manifest sha256:ad51e528901817c595f96fa60b33469347095134dbe83ea78c5de421d6ac3d8c 0.0s done
+[2026-10-28T05:35:09.643Z] #14 exporting manifest list sha256:487b78797a5fafb115d3fb87601f5477e1aebfaed7fc8ce2efaa080abee50b37
+[2026-10-28T05:35:09.895Z] #14 exporting manifest list sha256:487b78797a5fafb115d3fb87601f5477e1aebfaed7fc8ce2efaa080abee50b37 0.0s done
+[2026-10-28T05:35:09.895Z] #14 naming to docker.io/library/dataops-comisiones:3 done
+[2026-10-28T05:35:09.895Z] #14 unpacking to docker.io/library/dataops-comisiones:3 done
+[2026-10-28T05:35:09.895Z] #14 naming to docker.io/library/dataops-comisiones:latest done
+[2026-10-28T05:35:09.895Z] #14 unpacking to docker.io/library/dataops-comisiones:latest 0.0s done
+[2026-10-28T05:35:09.895Z] #14 DONE 0.1s
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (CD · DEV)
+[Pipeline] script
+[Pipeline] {
+[Pipeline] withCredentials
+[2026-10-28T05:35:10.069Z] Masking supported pattern matches of $PG_PASSWORD
+[Pipeline] {
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] sh
+[2026-10-28T05:35:11.067Z] 2026-10-28 05:35:11,052 | INFO    | Contenedor raw-dev ya existe
+[2026-10-28T05:35:11.067Z] 2026-10-28 05:35:11,054 | INFO    | Contenedor lake-dev ya existe
+[2026-10-28T05:35:11.317Z] 2026-10-28 05:35:11,070 | INFO    | Subido ComisionEmpleados_V1_202610.csv -> raw-dev/comisiones/ComisionEmpleados_V1_202610.csv
+[2026-10-28T05:35:11.869Z] 2026-10-28 05:35:11,777 | INFO    | === Pipeline comisiones | env=dev | periodo=202610 ===
+[2026-10-28T05:35:13.733Z] 2026-10-28 05:35:13,640 | INFO    | Extract SQL  : 48 filas de rrhh.empleado
+[2026-10-28T05:35:13.733Z] 2026-10-28 05:35:13,671 | INFO    | Extract Blob : 34 filas de raw-dev/comisiones/ComisionEmpleados_V1_202610.csv
+[2026-10-28T05:35:13.733Z] 2026-10-28 05:35:13,673 | WARNING | IDs del CSV sin empleado en BD (se descartan): [4]
+[2026-10-28T05:35:13.733Z] 2026-10-28 05:35:13,673 | INFO    | Empleados de BD sin comisión en el periodo: [6, 7, 8, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 50]
+[2026-10-28T05:35:13.733Z] 2026-10-28 05:35:13,678 | INFO    | Transform    : 33 filas tras JOIN por empleado_id
+[2026-10-28T05:35:13.733Z] 2026-10-28 05:35:13,681 | INFO    | Quality      : OK (todas las reglas cumplidas)
+[2026-10-28T05:35:13.983Z] 2026-10-28 05:35:13,751 | INFO    | Load Lake    : lake-dev/gold/comisiones/periodo=202610/comisiones_202610.parquet (7760 bytes)
+[2026-10-28T05:35:13.984Z] 2026-10-28 05:35:13,758 | INFO    | Load Lake    : lake-dev/gold/comisiones/periodo=202610/comisiones_202610.xlsx (7181 bytes)
+[2026-10-28T05:35:13.984Z] 2026-10-28 05:35:13,758 | INFO    | Resumen      : salario_total suma 436905.20
+[2026-10-28T05:35:14.534Z] 2026-10-28 05:35:14,450 | INFO    | Parquet lake-dev/gold/comisiones/periodo=202610/comisiones_202610.parquet: 33 filas, 10 columnas
+[2026-10-28T05:35:14.534Z] 2026-10-28 05:35:14,450 | INFO    | Columnas: ['periodo', 'empleado_id', 'nom_empleado', 'ape_empleado', 'cod_cargo', 'cod_departamento', 'mnt_salario', 'comision', 'salario_total', 'fecha_proceso']
+[2026-10-28T05:35:14.535Z] periodo  empleado_id nom_empleado ape_empleado cod_cargo cod_departamento  mnt_salario  comision  salario_total             fecha_proceso
+[2026-10-28T05:35:14.535Z]  202610            1          Ana        Pérez    CAR004           DEP004      1800.00      9000       10800.00 2026-10-28 05:35:13+00:00
+[2026-10-28T05:35:14.535Z]  202610            2       Carlos        López    CAR002           DEP002      2500.50      8250       10750.50 2026-10-28 05:35:13+00:00
+[2026-10-28T05:35:14.535Z]  202610            3        Sofía     Martínez    CAR003           DEP003      2200.75     10500       12700.75 2026-10-28 05:35:13+00:00
+[2026-10-28T05:35:14.535Z]  202610            5        Elena    Rodríguez    CAR005           DEP005      2000.20      9750       11750.20 2026-10-28 05:35:13+00:00
+[2026-10-28T05:35:14.535Z]  202610            9    Valentina         Ruiz    CAR001           DEP001      4200.50     10200       14400.50 2026-10-28 05:35:13+00:00
+[2026-10-28T05:35:14.535Z]  202610           10    Sebastián       Castro    CAR005           DEP005      1950.40      9000       10950.40 2026-10-28 05:35:13+00:00
+[2026-10-28T05:35:14.535Z]  202610           11      Luciana       Flores    CAR004           DEP004      1850.10     10800       12650.10 2026-10-28 05:35:13+00:00
+[2026-10-28T05:35:14.535Z]  202610           12       Andrés         Soto    CAR002           DEP002      2550.60     10350       12900.60 2026-10-28 05:35:13+00:00
+[2026-10-28T05:35:14.535Z]  202610           13      Mariana        Rojas    CAR003           DEP003      2250.30     11700       13950.30 2026-10-28 05:35:13+00:00
+[2026-10-28T05:35:14.535Z]  202610           14        Diego         Luna    CAR001           DEP001      4100.70      9750       13850.70 2026-10-28 05:35:13+00:00
+[2026-10-28T05:35:14.535Z] 2026-10-28 05:35:14,454 | INFO    | Verificación DEV OK
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // withCredentials
+[Pipeline] }
+[Pipeline] // script
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (CD · QA)
+[Pipeline] script
+[Pipeline] {
+[Pipeline] withCredentials
+[2026-10-28T05:35:15.047Z] Masking supported pattern matches of $PG_PASSWORD
+[Pipeline] {
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] sh
+[2026-10-28T05:35:16.050Z] 2026-10-28 05:35:16,040 | INFO    | Contenedor raw-qa ya existe
+[2026-10-28T05:35:16.050Z] 2026-10-28 05:35:16,042 | INFO    | Contenedor lake-qa ya existe
+[2026-10-28T05:35:16.050Z] 2026-10-28 05:35:16,049 | INFO    | Subido ComisionEmpleados_V1_202610.csv -> raw-qa/comisiones/ComisionEmpleados_V1_202610.csv
+[2026-10-28T05:35:16.961Z] 2026-10-28 05:35:16,725 | INFO    | === Pipeline comisiones | env=qa | periodo=202610 ===
+[2026-10-28T05:35:18.307Z] 2026-10-28 05:35:18,021 | INFO    | Extract SQL  : 48 filas de rrhh.empleado
+[2026-10-28T05:35:18.307Z] 2026-10-28 05:35:18,044 | INFO    | Extract Blob : 34 filas de raw-qa/comisiones/ComisionEmpleados_V1_202610.csv
+[2026-10-28T05:35:18.307Z] 2026-10-28 05:35:18,046 | WARNING | IDs del CSV sin empleado en BD (se descartan): [4]
+[2026-10-28T05:35:18.307Z] 2026-10-28 05:35:18,046 | INFO    | Empleados de BD sin comisión en el periodo: [6, 7, 8, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 50]
+[2026-10-28T05:35:18.307Z] 2026-10-28 05:35:18,053 | INFO    | Transform    : 33 filas tras JOIN por empleado_id
+[2026-10-28T05:35:18.307Z] 2026-10-28 05:35:18,057 | INFO    | Quality      : OK (todas las reglas cumplidas)
+[2026-10-28T05:35:18.307Z] 2026-10-28 05:35:18,143 | INFO    | Load Lake    : lake-qa/gold/comisiones/periodo=202610/comisiones_202610.parquet (7760 bytes)
+[2026-10-28T05:35:18.307Z] 2026-10-28 05:35:18,149 | INFO    | Load Lake    : lake-qa/gold/comisiones/periodo=202610/comisiones_202610.xlsx (7182 bytes)
+[2026-10-28T05:35:18.307Z] 2026-10-28 05:35:18,150 | INFO    | Resumen      : salario_total suma 436905.20
+[2026-10-28T05:35:18.858Z] 2026-10-28 05:35:18,853 | INFO    | Parquet lake-qa/gold/comisiones/periodo=202610/comisiones_202610.parquet: 33 filas, 10 columnas
+[2026-10-28T05:35:18.858Z] 2026-10-28 05:35:18,853 | INFO    | Columnas: ['periodo', 'empleado_id', 'nom_empleado', 'ape_empleado', 'cod_cargo', 'cod_departamento', 'mnt_salario', 'comision', 'salario_total', 'fecha_proceso']
+[2026-10-28T05:35:18.858Z] periodo  empleado_id nom_empleado ape_empleado cod_cargo cod_departamento  mnt_salario  comision  salario_total             fecha_proceso
+[2026-10-28T05:35:18.858Z]  202610            1          Ana        Pérez    CAR004           DEP004      1800.00      9000       10800.00 2026-10-28 05:35:18+00:00
+[2026-10-28T05:35:18.858Z]  202610            2       Carlos        López    CAR002           DEP002      2500.50      8250       10750.50 2026-10-28 05:35:18+00:00
+[2026-10-28T05:35:18.858Z]  202610            3        Sofía     Martínez    CAR003           DEP003      2200.75     10500       12700.75 2026-10-28 05:35:18+00:00
+[2026-10-28T05:35:18.858Z]  202610            5        Elena    Rodríguez    CAR005           DEP005      2000.20      9750       11750.20 2026-10-28 05:35:18+00:00
+[2026-10-28T05:35:18.858Z]  202610            9    Valentina         Ruiz    CAR001           DEP001      4200.50     10200       14400.50 2026-10-28 05:35:18+00:00
+[2026-10-28T05:35:18.858Z]  202610           10    Sebastián       Castro    CAR005           DEP005      1950.40      9000       10950.40 2026-10-28 05:35:18+00:00
+[2026-10-28T05:35:18.858Z]  202610           11      Luciana       Flores    CAR004           DEP004      1850.10     10800       12650.10 2026-10-28 05:35:18+00:00
+[2026-10-28T05:35:18.858Z]  202610           12       Andrés         Soto    CAR002           DEP002      2550.60     10350       12900.60 2026-10-28 05:35:18+00:00
+[2026-10-28T05:35:18.858Z]  202610           13      Mariana        Rojas    CAR003           DEP003      2250.30     11700       13950.30 2026-10-28 05:35:18+00:00
+[2026-10-28T05:35:18.858Z]  202610           14        Diego         Luna    CAR001           DEP001      4100.70      9750       13850.70 2026-10-28 05:35:18+00:00
+[2026-10-28T05:35:18.858Z] 2026-10-28 05:35:18,857 | INFO    | Verificación QA OK
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // withCredentials
+[Pipeline] }
+[Pipeline] // script
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Aprobación automática)
+[Pipeline] script
+[Pipeline] {
+[Pipeline] echo
+[2026-10-28T05:35:19.727Z] Quality gate QA: OK · rama origin/main · aprobado para PRD: true
+[Pipeline] }
+[Pipeline] // script
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (CD · PRD)
+[Pipeline] script
+[Pipeline] {
+[Pipeline] withCredentials
+[2026-10-28T05:35:19.949Z] Masking supported pattern matches of $PG_PASSWORD
+[Pipeline] {
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] sh
+[2026-10-28T05:35:20.920Z] 2026-10-28 05:35:20,917 | INFO    | Contenedor raw-prd ya existe
+[2026-10-28T05:35:20.920Z] 2026-10-28 05:35:20,919 | INFO    | Contenedor lake-prd ya existe
+[2026-10-28T05:35:21.170Z] 2026-10-28 05:35:20,938 | INFO    | Subido ComisionEmpleados_V1_202610.csv -> raw-prd/comisiones/ComisionEmpleados_V1_202610.csv
+[2026-10-28T05:35:21.722Z] 2026-10-28 05:35:21,644 | INFO    | === Pipeline comisiones | env=prd | periodo=202610 ===
+[2026-10-28T05:35:23.586Z] 2026-10-28 05:35:23,067 | INFO    | Extract SQL  : 48 filas de rrhh.empleado
+[2026-10-28T05:35:23.586Z] 2026-10-28 05:35:23,095 | INFO    | Extract Blob : 34 filas de raw-prd/comisiones/ComisionEmpleados_V1_202610.csv
+[2026-10-28T05:35:23.586Z] 2026-10-28 05:35:23,098 | WARNING | IDs del CSV sin empleado en BD (se descartan): [4]
+[2026-10-28T05:35:23.586Z] 2026-10-28 05:35:23,098 | INFO    | Empleados de BD sin comisión en el periodo: [6, 7, 8, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 50]
+[2026-10-28T05:35:23.586Z] 2026-10-28 05:35:23,104 | INFO    | Transform    : 33 filas tras JOIN por empleado_id
+[2026-10-28T05:35:23.586Z] 2026-10-28 05:35:23,109 | INFO    | Quality      : OK (todas las reglas cumplidas)
+[2026-10-28T05:35:23.586Z] 2026-10-28 05:35:23,207 | INFO    | Load Lake    : lake-prd/gold/comisiones/periodo=202610/comisiones_202610.parquet (7760 bytes)
+[2026-10-28T05:35:23.586Z] 2026-10-28 05:35:23,213 | INFO    | Load Lake    : lake-prd/gold/comisiones/periodo=202610/comisiones_202610.xlsx (7181 bytes)
+[2026-10-28T05:35:23.586Z] 2026-10-28 05:35:23,213 | INFO    | Resumen      : salario_total suma 436905.20
+[2026-10-28T05:35:24.138Z] 2026-10-28 05:35:23,917 | INFO    | Parquet lake-prd/gold/comisiones/periodo=202610/comisiones_202610.parquet: 33 filas, 10 columnas
+[2026-10-28T05:35:24.138Z] 2026-10-28 05:35:23,917 | INFO    | Columnas: ['periodo', 'empleado_id', 'nom_empleado', 'ape_empleado', 'cod_cargo', 'cod_departamento', 'mnt_salario', 'comision', 'salario_total', 'fecha_proceso']
+[2026-10-28T05:35:24.138Z] periodo  empleado_id nom_empleado ape_empleado cod_cargo cod_departamento  mnt_salario  comision  salario_total             fecha_proceso
+[2026-10-28T05:35:24.138Z]  202610            1          Ana        Pérez    CAR004           DEP004      1800.00      9000       10800.00 2026-10-28 05:35:23+00:00
+[2026-10-28T05:35:24.138Z]  202610            2       Carlos        López    CAR002           DEP002      2500.50      8250       10750.50 2026-10-28 05:35:23+00:00
+[2026-10-28T05:35:24.138Z]  202610            3        Sofía     Martínez    CAR003           DEP003      2200.75     10500       12700.75 2026-10-28 05:35:23+00:00
+[2026-10-28T05:35:24.138Z]  202610            5        Elena    Rodríguez    CAR005           DEP005      2000.20      9750       11750.20 2026-10-28 05:35:23+00:00
+[2026-10-28T05:35:24.138Z]  202610            9    Valentina         Ruiz    CAR001           DEP001      4200.50     10200       14400.50 2026-10-28 05:35:23+00:00
+[2026-10-28T05:35:24.138Z]  202610           10    Sebastián       Castro    CAR005           DEP005      1950.40      9000       10950.40 2026-10-28 05:35:23+00:00
+[2026-10-28T05:35:24.138Z]  202610           11      Luciana       Flores    CAR004           DEP004      1850.10     10800       12650.10 2026-10-28 05:35:23+00:00
+[2026-10-28T05:35:24.138Z]  202610           12       Andrés         Soto    CAR002           DEP002      2550.60     10350       12900.60 2026-10-28 05:35:23+00:00
+[2026-10-28T05:35:24.138Z]  202610           13      Mariana        Rojas    CAR003           DEP003      2250.30     11700       13950.30 2026-10-28 05:35:23+00:00
+[2026-10-28T05:35:24.138Z]  202610           14        Diego         Luna    CAR001           DEP001      4100.70      9750       13850.70 2026-10-28 05:35:23+00:00
+[2026-10-28T05:35:24.138Z] 2026-10-28 05:35:23,920 | INFO    | Verificación PRD OK
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // withCredentials
+[Pipeline] }
+[Pipeline] // script
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Declarative: Post Actions)
+[Pipeline] archiveArtifacts
+[2026-10-28T05:35:24.673Z] Archiving artifacts
+[Pipeline] sh
+[2026-10-28T05:35:24.949Z] + docker image rm dataops-comisiones:test-3
+[Pipeline] echo
+[2026-10-28T05:35:25.032Z] Pipeline OK: periodo 202610 desplegado en DEV → QA → PRD
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+[Pipeline] // timestamps
+[Pipeline] }
+[Pipeline] // timeout
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // node
+[Pipeline] End of Pipeline
+Finished: SUCCESS

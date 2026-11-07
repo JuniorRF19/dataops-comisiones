@@ -15,6 +15,10 @@ El resultado es una tabla consolidada en **Parquet** (más una copia en Excel) d
 
 ## 1. Arquitectura
 
+![Diagrama de arquitectura](docs/diagrama_arquitectura.png)
+
+Informe final con las evidencias: [docs/informe_final.md](docs/informe_final.md)
+
 ```
                    ┌──────────────────────── Jenkins (Docker) ────────────────────────┐
   git push ──►     │ CI: checkout → lint (ruff) → validar ARM → pytest → build imagen │

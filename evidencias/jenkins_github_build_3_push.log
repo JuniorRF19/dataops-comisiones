@@ -1,0 +1,444 @@
+Started by an SCM change
+Obtained Jenkinsfile from git https://github.com/JuniorRF19/dataops-comisiones.git
+[Pipeline] Start of Pipeline
+[Pipeline] node
+Running on Jenkins in /var/jenkins_home/workspace/dataops-comisiones
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Declarative: Checkout SCM)
+[Pipeline] checkout
+Selected Git installation does not exist. Using Default
+The recommended git tool is: NONE
+No credentials specified
+ > git rev-parse --resolve-git-dir /var/jenkins_home/workspace/dataops-comisiones/.git # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url https://github.com/JuniorRF19/dataops-comisiones.git # timeout=10
+Fetching upstream changes from https://github.com/JuniorRF19/dataops-comisiones.git
+ > git --version # timeout=10
+ > git --version # 'git version 2.47.3'
+ > git fetch --tags --force --progress -- https://github.com/JuniorRF19/dataops-comisiones.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git rev-parse refs/remotes/origin/main^{commit} # timeout=10
+Checking out Revision 61fb6073602d7fdffe8f08e064ce199d019f3829 (refs/remotes/origin/main)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f 61fb6073602d7fdffe8f08e064ce199d019f3829 # timeout=10
+Commit message: "docs: evidencias de Jenkins conectado a GitHub y guía de capturas"
+ > git rev-list --no-walk 792294fcba722bb001448c2164f9fffb30f849e2 # timeout=10
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] timeout
+Timeout set to expire in 30 min
+[Pipeline] {
+[Pipeline] timestamps
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (CI · Checkout)
+[Pipeline] checkout
+[2026-11-07T06:55:13.490Z] Selected Git installation does not exist. Using Default
+[2026-11-07T06:55:13.490Z] The recommended git tool is: NONE
+[2026-11-07T06:55:13.490Z] No credentials specified
+[2026-11-07T06:55:13.490Z]  > git rev-parse --resolve-git-dir /var/jenkins_home/workspace/dataops-comisiones/.git # timeout=10
+[2026-11-07T06:55:13.492Z] Fetching changes from the remote Git repository
+[2026-11-07T06:55:13.493Z]  > git config remote.origin.url https://github.com/JuniorRF19/dataops-comisiones.git # timeout=10
+[2026-11-07T06:55:13.495Z] Fetching upstream changes from https://github.com/JuniorRF19/dataops-comisiones.git
+[2026-11-07T06:55:13.495Z]  > git --version # timeout=10
+[2026-11-07T06:55:13.496Z]  > git --version # 'git version 2.47.3'
+[2026-11-07T06:55:13.497Z]  > git fetch --tags --force --progress -- https://github.com/JuniorRF19/dataops-comisiones.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+[2026-11-07T06:55:14.003Z]  > git rev-parse refs/remotes/origin/main^{commit} # timeout=10
+[2026-11-07T06:55:14.008Z] Checking out Revision 61fb6073602d7fdffe8f08e064ce199d019f3829 (refs/remotes/origin/main)
+[2026-11-07T06:55:14.008Z]  > git config core.sparsecheckout # timeout=10
+[2026-11-07T06:55:14.013Z]  > git checkout -f 61fb6073602d7fdffe8f08e064ce199d019f3829 # timeout=10
+[2026-11-07T06:55:14.020Z] Commit message: "docs: evidencias de Jenkins conectado a GitHub y guía de capturas"
+[Pipeline] sh
+[2026-11-07T06:55:14.323Z] + git log -1 --pretty=Commit %h · %an · %s
+[2026-11-07T06:55:14.324Z] Commit 61fb607 · Junior Rojas · docs: evidencias de Jenkins conectado a GitHub y guía de capturas
+[Pipeline] sh
+[2026-11-07T06:55:14.637Z] + docker --version
+[2026-11-07T06:55:14.637Z] Docker version 29.9.2, build a82e528
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (CI · Lint, ARM y Unit tests)
+[Pipeline] sh
+[2026-11-07T06:55:15.044Z] + docker build --target test -t dataops-comisiones:test-3 .
+[2026-11-07T06:55:15.295Z] #0 building with "default" instance using docker driver
+[2026-11-07T06:55:15.295Z] 
+[2026-11-07T06:55:15.295Z] #1 [internal] load build definition from Dockerfile
+[2026-11-07T06:55:15.295Z] #1 transferring dockerfile: 1.04kB done
+[2026-11-07T06:55:15.295Z] #1 DONE 0.0s
+[2026-11-07T06:55:15.295Z] 
+[2026-11-07T06:55:15.295Z] #2 [internal] load metadata for docker.io/library/python:3.11-slim
+[2026-11-07T06:55:15.848Z] #2 DONE 0.8s
+[2026-11-07T06:55:15.848Z] 
+[2026-11-07T06:55:15.848Z] #3 [internal] load .dockerignore
+[2026-11-07T06:55:15.848Z] #3 transferring context: 2B done
+[2026-11-07T06:55:15.848Z] #3 DONE 0.0s
+[2026-11-07T06:55:15.848Z] 
+[2026-11-07T06:55:15.848Z] #4 [internal] load build context
+[2026-11-07T06:55:15.848Z] #4 transferring context: 5.95kB done
+[2026-11-07T06:55:15.848Z] #4 DONE 0.0s
+[2026-11-07T06:55:15.848Z] 
+[2026-11-07T06:55:15.848Z] #5 [base 1/9] FROM docker.io/library/python:3.11-slim@sha256:65bd3d9f1d7fa268dd1909973ba7eb4bdf41f6dcf2cfbe76ba9528b170f3fd79
+[2026-11-07T06:55:15.848Z] #5 resolve docker.io/library/python:3.11-slim@sha256:65bd3d9f1d7fa268dd1909973ba7eb4bdf41f6dcf2cfbe76ba9528b170f3fd79 0.0s done
+[2026-11-07T06:55:15.848Z] #5 DONE 0.0s
+[2026-11-07T06:55:15.848Z] 
+[2026-11-07T06:55:15.848Z] #6 [base 4/9] RUN pip install --no-cache-dir -r app/requirements.txt
+[2026-11-07T06:55:15.848Z] #6 CACHED
+[2026-11-07T06:55:15.848Z] 
+[2026-11-07T06:55:15.848Z] #7 [base 3/9] COPY app/requirements.txt app/requirements.txt
+[2026-11-07T06:55:15.848Z] #7 CACHED
+[2026-11-07T06:55:15.848Z] 
+[2026-11-07T06:55:15.848Z] #8 [base 5/9] COPY app/ app/
+[2026-11-07T06:55:15.848Z] #8 CACHED
+[2026-11-07T06:55:15.848Z] 
+[2026-11-07T06:55:15.848Z] #9 [base 6/9] COPY config/ config/
+[2026-11-07T06:55:15.848Z] #9 CACHED
+[2026-11-07T06:55:15.848Z] 
+[2026-11-07T06:55:15.848Z] #10 [base 2/9] WORKDIR /opt/dataops
+[2026-11-07T06:55:15.848Z] #10 CACHED
+[2026-11-07T06:55:15.848Z] 
+[2026-11-07T06:55:15.848Z] #11 [base 7/9] COPY data/ data/
+[2026-11-07T06:55:15.848Z] #11 CACHED
+[2026-11-07T06:55:15.848Z] 
+[2026-11-07T06:55:15.848Z] #12 [base 8/9] COPY scripts/ scripts/
+[2026-11-07T06:55:15.848Z] #12 DONE 0.0s
+[2026-11-07T06:55:15.848Z] 
+[2026-11-07T06:55:15.848Z] #13 [base 9/9] COPY infra/ infra/
+[2026-11-07T06:55:15.848Z] #13 DONE 0.0s
+[2026-11-07T06:55:16.099Z] 
+[2026-11-07T06:55:16.099Z] #14 [test 1/3] COPY requirements-dev.txt pyproject.toml ./
+[2026-11-07T06:55:16.099Z] #14 DONE 0.1s
+[2026-11-07T06:55:16.099Z] 
+[2026-11-07T06:55:16.099Z] #15 [test 2/3] RUN pip install --no-cache-dir -r requirements-dev.txt
+[2026-11-07T06:55:17.010Z] #15 0.898 Requirement already satisfied: pandas==2.2.3 in /usr/local/lib/python3.11/site-packages (from -r app/requirements.txt (line 1)) (2.2.3)
+[2026-11-07T06:55:17.010Z] #15 0.898 Requirement already satisfied: pyarrow==18.1.0 in /usr/local/lib/python3.11/site-packages (from -r app/requirements.txt (line 2)) (18.1.0)
+[2026-11-07T06:55:17.010Z] #15 0.899 Requirement already satisfied: psycopg2-binary==2.9.10 in /usr/local/lib/python3.11/site-packages (from -r app/requirements.txt (line 3)) (2.9.10)
+[2026-11-07T06:55:17.010Z] #15 0.900 Requirement already satisfied: azure-storage-blob==12.24.0 in /usr/local/lib/python3.11/site-packages (from -r app/requirements.txt (line 4)) (12.24.0)
+[2026-11-07T06:55:17.010Z] #15 0.900 Requirement already satisfied: PyYAML==6.0.2 in /usr/local/lib/python3.11/site-packages (from -r app/requirements.txt (line 5)) (6.0.2)
+[2026-11-07T06:55:17.010Z] #15 0.901 Requirement already satisfied: openpyxl==3.1.5 in /usr/local/lib/python3.11/site-packages (from -r app/requirements.txt (line 6)) (3.1.5)
+[2026-11-07T06:55:17.010Z] #15 0.986 Collecting pytest==8.3.4 (from -r requirements-dev.txt (line 2))
+[2026-11-07T06:55:17.010Z] #15 1.050   Downloading pytest-8.3.4-py3-none-any.whl.metadata (7.5 kB)
+[2026-11-07T06:55:17.260Z] #15 1.375 Collecting ruff==0.8.4 (from -r requirements-dev.txt (line 3))
+[2026-11-07T06:55:17.511Z] #15 1.382   Downloading ruff-0.8.4-py3-none-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (25 kB)
+[2026-11-07T06:55:17.511Z] #15 1.424 Requirement already satisfied: numpy>=1.23.2 in /usr/local/lib/python3.11/site-packages (from pandas==2.2.3->-r app/requirements.txt (line 1)) (2.4.6)
+[2026-11-07T06:55:17.511Z] #15 1.425 Requirement already satisfied: python-dateutil>=2.8.2 in /usr/local/lib/python3.11/site-packages (from pandas==2.2.3->-r app/requirements.txt (line 1)) (4.0.0)
+[2026-11-07T06:55:17.511Z] #15 1.427 Requirement already satisfied: pytz>=2020.1 in /usr/local/lib/python3.11/site-packages (from pandas==2.2.3->-r app/requirements.txt (line 1)) (2026.6)
+[2026-11-07T06:55:17.511Z] #15 1.427 Requirement already satisfied: tzdata>=2022.7 in /usr/local/lib/python3.11/site-packages (from pandas==2.2.3->-r app/requirements.txt (line 1)) (2026.6)
+[2026-11-07T06:55:17.511Z] #15 1.435 Requirement already satisfied: azure-core>=1.30.0 in /usr/local/lib/python3.11/site-packages (from azure-storage-blob==12.24.0->-r app/requirements.txt (line 4)) (1.41.0)
+[2026-11-07T06:55:17.511Z] #15 1.436 Requirement already satisfied: cryptography>=2.1.4 in /usr/local/lib/python3.11/site-packages (from azure-storage-blob==12.24.0->-r app/requirements.txt (line 4)) (50.0.2)
+[2026-11-07T06:55:17.511Z] #15 1.436 Requirement already satisfied: typing-extensions>=4.6.0 in /usr/local/lib/python3.11/site-packages (from azure-storage-blob==12.24.0->-r app/requirements.txt (line 4)) (4.16.0)
+[2026-11-07T06:55:17.511Z] #15 1.437 Requirement already satisfied: isodate>=0.6.1 in /usr/local/lib/python3.11/site-packages (from azure-storage-blob==12.24.0->-r app/requirements.txt (line 4)) (0.7.2)
+[2026-11-07T06:55:17.511Z] #15 1.440 Requirement already satisfied: et-xmlfile in /usr/local/lib/python3.11/site-packages (from openpyxl==3.1.5->-r app/requirements.txt (line 6)) (2.0.0)
+[2026-11-07T06:55:17.511Z] #15 1.456 Collecting iniconfig (from pytest==8.3.4->-r requirements-dev.txt (line 2))
+[2026-11-07T06:55:17.511Z] #15 1.462   Downloading iniconfig-2.3.1-py3-none-any.whl.metadata (2.8 kB)
+[2026-11-07T06:55:17.511Z] #15 1.463 Requirement already satisfied: packaging in /usr/local/lib/python3.11/site-packages (from pytest==8.3.4->-r requirements-dev.txt (line 2)) (26.3)
+[2026-11-07T06:55:17.511Z] #15 1.478 Collecting pluggy<2,>=1.5 (from pytest==8.3.4->-r requirements-dev.txt (line 2))
+[2026-11-07T06:55:17.761Z] #15 1.484   Downloading pluggy-1.7.0-py3-none-any.whl.metadata (5.0 kB)
+[2026-11-07T06:55:17.761Z] #15 1.489 Requirement already satisfied: requests>=2.21.0 in /usr/local/lib/python3.11/site-packages (from azure-core>=1.30.0->azure-storage-blob==12.24.0->-r app/requirements.txt (line 4)) (2.34.2)
+[2026-11-07T06:55:17.761Z] #15 1.493 Requirement already satisfied: cffi>=2.0.0 in /usr/local/lib/python3.11/site-packages (from cryptography>=2.1.4->azure-storage-blob==12.24.0->-r app/requirements.txt (line 4)) (2.1.1)
+[2026-11-07T06:55:17.761Z] #15 1.503 Requirement already satisfied: pycparser in /usr/local/lib/python3.11/site-packages (from cffi>=2.0.0->cryptography>=2.1.4->azure-storage-blob==12.24.0->-r app/requirements.txt (line 4)) (3.12)
+[2026-11-07T06:55:17.761Z] #15 1.508 Requirement already satisfied: charset_normalizer<4,>=2 in /usr/local/lib/python3.11/site-packages (from requests>=2.21.0->azure-core>=1.30.0->azure-storage-blob==12.24.0->-r app/requirements.txt (line 4)) (3.5.2)
+[2026-11-07T06:55:17.761Z] #15 1.508 Requirement already satisfied: idna<4,>=2.5 in /usr/local/lib/python3.11/site-packages (from requests>=2.21.0->azure-core>=1.30.0->azure-storage-blob==12.24.0->-r app/requirements.txt (line 4)) (3.20)
+[2026-11-07T06:55:17.761Z] #15 1.509 Requirement already satisfied: urllib3<3,>=1.26 in /usr/local/lib/python3.11/site-packages (from requests>=2.21.0->azure-core>=1.30.0->azure-storage-blob==12.24.0->-r app/requirements.txt (line 4)) (2.8.0)
+[2026-11-07T06:55:17.761Z] #15 1.510 Requirement already satisfied: certifi>=2023.5.7 in /usr/local/lib/python3.11/site-packages (from requests>=2.21.0->azure-core>=1.30.0->azure-storage-blob==12.24.0->-r app/requirements.txt (line 4)) (2026.10.23)
+[2026-11-07T06:55:17.761Z] #15 1.528 Downloading pytest-8.3.4-py3-none-any.whl (343 kB)
+[2026-11-07T06:55:17.761Z] #15 1.551    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 343.1/343.1 kB 17.1 MB/s eta 0:00:00
+[2026-11-07T06:55:17.761Z] #15 1.558 Downloading ruff-0.8.4-py3-none-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (11.2 MB)
+[2026-11-07T06:55:18.312Z] #15 2.288    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 11.2/11.2 MB 15.6 MB/s eta 0:00:00
+[2026-11-07T06:55:18.312Z] #15 2.295 Downloading pluggy-1.7.0-py3-none-any.whl (27 kB)
+[2026-11-07T06:55:18.312Z] #15 2.303 Downloading iniconfig-2.3.1-py3-none-any.whl (7.6 kB)
+[2026-11-07T06:55:18.312Z] #15 2.388 Installing collected packages: ruff, pluggy, iniconfig, pytest
+[2026-11-07T06:55:18.563Z] #15 2.666 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv
+[2026-11-07T06:55:18.563Z] #15 2.666 Successfully installed iniconfig-2.3.1 pluggy-1.7.0 pytest-8.3.4 ruff-0.8.4
+[2026-11-07T06:55:18.813Z] #15 2.738 
+[2026-11-07T06:55:18.813Z] #15 2.738 [notice] A new release of pip is available: 24.0 -> 26.3
+[2026-11-07T06:55:18.813Z] #15 2.738 [notice] To update, run: pip install --upgrade pip
+[2026-11-07T06:55:18.813Z] #15 DONE 2.8s
+[2026-11-07T06:55:19.064Z] 
+[2026-11-07T06:55:19.064Z] #16 [test 3/3] COPY tests/ tests/
+[2026-11-07T06:55:19.064Z] #16 DONE 0.0s
+[2026-11-07T06:55:19.064Z] 
+[2026-11-07T06:55:19.064Z] #17 exporting to image
+[2026-11-07T06:55:19.064Z] #17 exporting layers
+[2026-11-07T06:55:19.975Z] #17 exporting layers 1.0s done
+[2026-11-07T06:55:19.975Z] #17 exporting manifest sha256:64ce2b84d481e461becf7169a6d78c05d1a2edd6ee0bc99005b760eb7464a516 0.0s done
+[2026-11-07T06:55:19.975Z] #17 exporting config sha256:c833369fa5e2d56a4008b2c8b00025bd1c5aff6e89bf23444cf15701816a7768 0.0s done
+[2026-11-07T06:55:19.975Z] #17 exporting attestation manifest sha256:5e0b0ce239c20db9cecc6dfb739643951f4792ae18ccb1ad65aa459a47d97d4e 0.0s done
+[2026-11-07T06:55:19.975Z] #17 exporting manifest list sha256:0a974f97c0256e0cb84075720ffa7463d43f85c666cc49be6d7a0251f2c46d4f 0.0s done
+[2026-11-07T06:55:19.975Z] #17 naming to docker.io/library/dataops-comisiones:test-3 done
+[2026-11-07T06:55:19.975Z] #17 unpacking to docker.io/library/dataops-comisiones:test-3
+[2026-11-07T06:55:20.227Z] #17 unpacking to docker.io/library/dataops-comisiones:test-3 0.2s done
+[2026-11-07T06:55:20.227Z] #17 DONE 1.3s
+[Pipeline] sh
+[2026-11-07T06:55:20.834Z] All checks passed!
+[2026-11-07T06:55:20.834Z] [dev] Storage Account: azdmcdevdedlslake
+[2026-11-07T06:55:20.834Z] [qa] Storage Account: azdmcqadedlslake
+[2026-11-07T06:55:20.834Z] [prd] Storage Account: azdmcprddedlslake
+[2026-11-07T06:55:20.834Z] Plantillas ARM válidas
+[2026-11-07T06:55:21.084Z] ============================= test session starts ==============================
+[2026-11-07T06:55:21.084Z] platform linux -- Python 3.11.18, pytest-8.3.4, pluggy-1.7.0 -- /usr/local/bin/python3.11
+[2026-11-07T06:55:21.084Z] cachedir: .pytest_cache
+[2026-11-07T06:55:21.084Z] rootdir: /opt/dataops
+[2026-11-07T06:55:21.084Z] configfile: pyproject.toml
+[2026-11-07T06:55:21.084Z] testpaths: tests
+[2026-11-07T06:55:21.335Z] collecting ... collected 17 items
+[2026-11-07T06:55:21.335Z] 
+[2026-11-07T06:55:21.335Z] tests/test_quality.py::test_good_data_passes PASSED                      [  5%]
+[2026-11-07T06:55:21.335Z] tests/test_quality.py::test_empty_fails PASSED                           [ 11%]
+[2026-11-07T06:55:21.335Z] tests/test_quality.py::test_duplicate_ids PASSED                         [ 17%]
+[2026-11-07T06:55:21.335Z] tests/test_quality.py::test_negative_commission PASSED                   [ 23%]
+[2026-11-07T06:55:21.335Z] tests/test_quality.py::test_null_commission PASSED                       [ 29%]
+[2026-11-07T06:55:21.335Z] tests/test_quality.py::test_wrong_total PASSED                           [ 35%]
+[2026-11-07T06:55:21.335Z] tests/test_quality.py::test_missing_columns PASSED                       [ 41%]
+[2026-11-07T06:55:21.335Z] tests/test_transform.py::test_normalize_column[Comisi\xf3n-comision] PASSED [ 47%]
+[2026-11-07T06:55:21.335Z] tests/test_transform.py::test_normalize_column[Nombre y Apellido-nombre_y_apellido] PASSED [ 52%]
+[2026-11-07T06:55:21.335Z] tests/test_transform.py::test_normalize_column[ empleado_id -empleado_id] PASSED [ 58%]
+[2026-11-07T06:55:21.335Z] tests/test_transform.py::test_read_csv_any_encoding[utf-8] PASSED        [ 64%]
+[2026-11-07T06:55:21.335Z] tests/test_transform.py::test_read_csv_any_encoding[utf-8-sig] PASSED    [ 70%]
+[2026-11-07T06:55:21.335Z] tests/test_transform.py::test_read_csv_any_encoding[latin-1] PASSED      [ 76%]
+[2026-11-07T06:55:21.335Z] tests/test_transform.py::test_read_csv_missing_column PASSED             [ 82%]
+[2026-11-07T06:55:21.335Z] tests/test_transform.py::test_join_and_salario_total PASSED              [ 88%]
+[2026-11-07T06:55:21.335Z] tests/test_transform.py::test_salario_total_accepts_decimal PASSED       [ 94%]
+[2026-11-07T06:55:21.335Z] tests/test_transform.py::test_output_columns PASSED                      [100%]
+[2026-11-07T06:55:21.335Z] 
+[2026-11-07T06:55:21.335Z] -------------- generated xml file: /opt/dataops/reports/junit.xml --------------
+[2026-11-07T06:55:21.335Z] ============================== 17 passed in 0.35s ==============================
+Post stage
+[Pipeline] junit
+[2026-11-07T06:55:21.612Z] Recording test results
+[2026-11-07T06:55:21.623Z] [Checks API] No suitable checks publisher found.
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (CI · Build imagen)
+[Pipeline] sh
+[2026-11-07T06:55:22.002Z] + docker build --target runtime -t dataops-comisiones:3 -t dataops-comisiones:latest .
+[2026-11-07T06:55:22.253Z] #0 building with "default" instance using docker driver
+[2026-11-07T06:55:22.253Z] 
+[2026-11-07T06:55:22.253Z] #1 [internal] load build definition from Dockerfile
+[2026-11-07T06:55:22.253Z] #1 transferring dockerfile: 1.04kB done
+[2026-11-07T06:55:22.253Z] #1 DONE 0.0s
+[2026-11-07T06:55:22.253Z] 
+[2026-11-07T06:55:22.253Z] #2 [internal] load metadata for docker.io/library/python:3.11-slim
+[2026-11-07T06:55:22.253Z] #2 DONE 0.2s
+[2026-11-07T06:55:22.253Z] 
+[2026-11-07T06:55:22.253Z] #3 [internal] load .dockerignore
+[2026-11-07T06:55:22.253Z] #3 transferring context: 2B done
+[2026-11-07T06:55:22.253Z] #3 DONE 0.0s
+[2026-11-07T06:55:22.253Z] 
+[2026-11-07T06:55:22.253Z] #4 [internal] load build context
+[2026-11-07T06:55:22.253Z] #4 transferring context: 907B done
+[2026-11-07T06:55:22.253Z] #4 DONE 0.0s
+[2026-11-07T06:55:22.253Z] 
+[2026-11-07T06:55:22.253Z] #5 [base 1/9] FROM docker.io/library/python:3.11-slim@sha256:65bd3d9f1d7fa268dd1909973ba7eb4bdf41f6dcf2cfbe76ba9528b170f3fd79
+[2026-11-07T06:55:22.253Z] #5 resolve docker.io/library/python:3.11-slim@sha256:65bd3d9f1d7fa268dd1909973ba7eb4bdf41f6dcf2cfbe76ba9528b170f3fd79 0.0s done
+[2026-11-07T06:55:22.253Z] #5 DONE 0.0s
+[2026-11-07T06:55:22.253Z] 
+[2026-11-07T06:55:22.253Z] #6 [base 4/9] RUN pip install --no-cache-dir -r app/requirements.txt
+[2026-11-07T06:55:22.253Z] #6 CACHED
+[2026-11-07T06:55:22.253Z] 
+[2026-11-07T06:55:22.253Z] #7 [base 7/9] COPY data/ data/
+[2026-11-07T06:55:22.253Z] #7 CACHED
+[2026-11-07T06:55:22.253Z] 
+[2026-11-07T06:55:22.253Z] #8 [base 2/9] WORKDIR /opt/dataops
+[2026-11-07T06:55:22.253Z] #8 CACHED
+[2026-11-07T06:55:22.253Z] 
+[2026-11-07T06:55:22.253Z] #9 [base 3/9] COPY app/requirements.txt app/requirements.txt
+[2026-11-07T06:55:22.253Z] #9 CACHED
+[2026-11-07T06:55:22.253Z] 
+[2026-11-07T06:55:22.253Z] #10 [base 6/9] COPY config/ config/
+[2026-11-07T06:55:22.253Z] #10 CACHED
+[2026-11-07T06:55:22.253Z] 
+[2026-11-07T06:55:22.253Z] #11 [base 5/9] COPY app/ app/
+[2026-11-07T06:55:22.253Z] #11 CACHED
+[2026-11-07T06:55:22.253Z] 
+[2026-11-07T06:55:22.253Z] #12 [base 8/9] COPY scripts/ scripts/
+[2026-11-07T06:55:22.253Z] #12 CACHED
+[2026-11-07T06:55:22.253Z] 
+[2026-11-07T06:55:22.253Z] #13 [base 9/9] COPY infra/ infra/
+[2026-11-07T06:55:22.253Z] #13 CACHED
+[2026-11-07T06:55:22.253Z] 
+[2026-11-07T06:55:22.253Z] #14 exporting to image
+[2026-11-07T06:55:22.253Z] #14 exporting layers done
+[2026-11-07T06:55:22.253Z] #14 exporting manifest sha256:a75b04fc57b49ab7e8fc1e0c72afcc6f193a38c3ce0d96d31e02e51a6deb6633 0.0s done
+[2026-11-07T06:55:22.253Z] #14 exporting config sha256:47374d362820e1c6e6c3f4d61382262aa5399498d82b25eef679320e2eb1f0d3 0.0s done
+[2026-11-07T06:55:22.253Z] #14 exporting attestation manifest sha256:f099da48afc1d619943f7801a12e5474f7d2ce5833596513908c5767f1b30507
+[2026-11-07T06:55:22.504Z] #14 exporting attestation manifest sha256:f099da48afc1d619943f7801a12e5474f7d2ce5833596513908c5767f1b30507 0.0s done
+[2026-11-07T06:55:22.504Z] #14 exporting manifest list sha256:6f102fa8d70af7a518044bd38c1f42834637c0e4800605d75a84055ce0d3315b 0.0s done
+[2026-11-07T06:55:22.504Z] #14 naming to docker.io/library/dataops-comisiones:3 done
+[2026-11-07T06:55:22.504Z] #14 unpacking to docker.io/library/dataops-comisiones:3 0.0s done
+[2026-11-07T06:55:22.504Z] #14 naming to docker.io/library/dataops-comisiones:latest done
+[2026-11-07T06:55:22.504Z] #14 unpacking to docker.io/library/dataops-comisiones:latest done
+[2026-11-07T06:55:22.504Z] #14 DONE 0.1s
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (CD · DEV)
+[Pipeline] script
+[Pipeline] {
+[Pipeline] withCredentials
+[2026-11-07T06:55:22.675Z] Masking supported pattern matches of $PG_PASSWORD
+[Pipeline] {
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] sh
+[2026-11-07T06:55:24.081Z] 2026-11-07 06:55:23,659 | INFO    | Contenedor raw-dev ya existe
+[2026-11-07T06:55:24.081Z] 2026-11-07 06:55:23,661 | INFO    | Contenedor lake-dev ya existe
+[2026-11-07T06:55:24.081Z] 2026-11-07 06:55:23,679 | INFO    | Subido ComisionEmpleados_V1_202610.csv -> raw-dev/comisiones/ComisionEmpleados_V1_202610.csv
+[2026-11-07T06:55:24.632Z] 2026-11-07 06:55:24,332 | INFO    | === Pipeline comisiones | env=dev | periodo=202610 ===
+[2026-11-07T06:55:26.497Z] 2026-11-07 06:55:26,045 | INFO    | Extract SQL  : 48 filas de rrhh.empleado
+[2026-11-07T06:55:26.497Z] 2026-11-07 06:55:26,070 | INFO    | Extract Blob : 34 filas de raw-dev/comisiones/ComisionEmpleados_V1_202610.csv
+[2026-11-07T06:55:26.497Z] 2026-11-07 06:55:26,072 | WARNING | IDs del CSV sin empleado en BD (se descartan): [4]
+[2026-11-07T06:55:26.497Z] 2026-11-07 06:55:26,072 | INFO    | Empleados de BD sin comisión en el periodo: [6, 7, 8, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 50]
+[2026-11-07T06:55:26.497Z] 2026-11-07 06:55:26,078 | INFO    | Transform    : 33 filas tras JOIN por empleado_id
+[2026-11-07T06:55:26.497Z] 2026-11-07 06:55:26,083 | INFO    | Quality      : OK (todas las reglas cumplidas)
+[2026-11-07T06:55:26.497Z] 2026-11-07 06:55:26,164 | INFO    | Load Lake    : lake-dev/gold/comisiones/periodo=202610/comisiones_202610.parquet (7760 bytes)
+[2026-11-07T06:55:26.497Z] 2026-11-07 06:55:26,172 | INFO    | Load Lake    : lake-dev/gold/comisiones/periodo=202610/comisiones_202610.xlsx (7183 bytes)
+[2026-11-07T06:55:26.497Z] 2026-11-07 06:55:26,172 | INFO    | Resumen      : salario_total suma 436905.20
+[2026-11-07T06:55:27.048Z] 2026-11-07 06:55:26,855 | INFO    | Parquet lake-dev/gold/comisiones/periodo=202610/comisiones_202610.parquet: 33 filas, 10 columnas
+[2026-11-07T06:55:27.048Z] 2026-11-07 06:55:26,855 | INFO    | Columnas: ['periodo', 'empleado_id', 'nom_empleado', 'ape_empleado', 'cod_cargo', 'cod_departamento', 'mnt_salario', 'comision', 'salario_total', 'fecha_proceso']
+[2026-11-07T06:55:27.048Z] periodo  empleado_id nom_empleado ape_empleado cod_cargo cod_departamento  mnt_salario  comision  salario_total             fecha_proceso
+[2026-11-07T06:55:27.048Z]  202610            1          Ana        Pérez    CAR004           DEP004      1800.00      9000       10800.00 2026-11-07 06:55:26+00:00
+[2026-11-07T06:55:27.049Z]  202610            2       Carlos        López    CAR002           DEP002      2500.50      8250       10750.50 2026-11-07 06:55:26+00:00
+[2026-11-07T06:55:27.049Z]  202610            3        Sofía     Martínez    CAR003           DEP003      2200.75     10500       12700.75 2026-11-07 06:55:26+00:00
+[2026-11-07T06:55:27.049Z]  202610            5        Elena    Rodríguez    CAR005           DEP005      2000.20      9750       11750.20 2026-11-07 06:55:26+00:00
+[2026-11-07T06:55:27.049Z]  202610            9    Valentina         Ruiz    CAR001           DEP001      4200.50     10200       14400.50 2026-11-07 06:55:26+00:00
+[2026-11-07T06:55:27.049Z]  202610           10    Sebastián       Castro    CAR005           DEP005      1950.40      9000       10950.40 2026-11-07 06:55:26+00:00
+[2026-11-07T06:55:27.049Z]  202610           11      Luciana       Flores    CAR004           DEP004      1850.10     10800       12650.10 2026-11-07 06:55:26+00:00
+[2026-11-07T06:55:27.049Z]  202610           12       Andrés         Soto    CAR002           DEP002      2550.60     10350       12900.60 2026-11-07 06:55:26+00:00
+[2026-11-07T06:55:27.049Z]  202610           13      Mariana        Rojas    CAR003           DEP003      2250.30     11700       13950.30 2026-11-07 06:55:26+00:00
+[2026-11-07T06:55:27.049Z]  202610           14        Diego         Luna    CAR001           DEP001      4100.70      9750       13850.70 2026-11-07 06:55:26+00:00
+[2026-11-07T06:55:27.049Z] 2026-11-07 06:55:26,859 | INFO    | Verificación DEV OK
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // withCredentials
+[Pipeline] }
+[Pipeline] // script
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (CD · QA)
+[Pipeline] script
+[Pipeline] {
+[Pipeline] withCredentials
+[2026-11-07T06:55:27.584Z] Masking supported pattern matches of $PG_PASSWORD
+[Pipeline] {
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] sh
+[2026-11-07T06:55:28.565Z] 2026-11-07 06:55:28,546 | INFO    | Contenedor raw-qa ya existe
+[2026-11-07T06:55:28.565Z] 2026-11-07 06:55:28,548 | INFO    | Contenedor lake-qa ya existe
+[2026-11-07T06:55:28.565Z] 2026-11-07 06:55:28,563 | INFO    | Subido ComisionEmpleados_V1_202610.csv -> raw-qa/comisiones/ComisionEmpleados_V1_202610.csv
+[2026-11-07T06:55:29.477Z] 2026-11-07 06:55:29,214 | INFO    | === Pipeline comisiones | env=qa | periodo=202610 ===
+[2026-11-07T06:55:31.340Z] 2026-11-07 06:55:30,856 | INFO    | Extract SQL  : 48 filas de rrhh.empleado
+[2026-11-07T06:55:31.340Z] 2026-11-07 06:55:30,869 | INFO    | Extract Blob : 34 filas de raw-qa/comisiones/ComisionEmpleados_V1_202610.csv
+[2026-11-07T06:55:31.340Z] 2026-11-07 06:55:30,870 | WARNING | IDs del CSV sin empleado en BD (se descartan): [4]
+[2026-11-07T06:55:31.340Z] 2026-11-07 06:55:30,870 | INFO    | Empleados de BD sin comisión en el periodo: [6, 7, 8, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 50]
+[2026-11-07T06:55:31.340Z] 2026-11-07 06:55:30,872 | INFO    | Transform    : 33 filas tras JOIN por empleado_id
+[2026-11-07T06:55:31.341Z] 2026-11-07 06:55:30,874 | INFO    | Quality      : OK (todas las reglas cumplidas)
+[2026-11-07T06:55:31.341Z] 2026-11-07 06:55:30,941 | INFO    | Load Lake    : lake-qa/gold/comisiones/periodo=202610/comisiones_202610.parquet (7760 bytes)
+[2026-11-07T06:55:31.341Z] 2026-11-07 06:55:30,947 | INFO    | Load Lake    : lake-qa/gold/comisiones/periodo=202610/comisiones_202610.xlsx (7183 bytes)
+[2026-11-07T06:55:31.341Z] 2026-11-07 06:55:30,947 | INFO    | Resumen      : salario_total suma 436905.20
+[2026-11-07T06:55:31.893Z] 2026-11-07 06:55:31,677 | INFO    | Parquet lake-qa/gold/comisiones/periodo=202610/comisiones_202610.parquet: 33 filas, 10 columnas
+[2026-11-07T06:55:31.893Z] 2026-11-07 06:55:31,677 | INFO    | Columnas: ['periodo', 'empleado_id', 'nom_empleado', 'ape_empleado', 'cod_cargo', 'cod_departamento', 'mnt_salario', 'comision', 'salario_total', 'fecha_proceso']
+[2026-11-07T06:55:31.893Z] periodo  empleado_id nom_empleado ape_empleado cod_cargo cod_departamento  mnt_salario  comision  salario_total             fecha_proceso
+[2026-11-07T06:55:31.893Z]  202610            1          Ana        Pérez    CAR004           DEP004      1800.00      9000       10800.00 2026-11-07 06:55:30+00:00
+[2026-11-07T06:55:31.893Z]  202610            2       Carlos        López    CAR002           DEP002      2500.50      8250       10750.50 2026-11-07 06:55:30+00:00
+[2026-11-07T06:55:31.893Z]  202610            3        Sofía     Martínez    CAR003           DEP003      2200.75     10500       12700.75 2026-11-07 06:55:30+00:00
+[2026-11-07T06:55:31.893Z]  202610            5        Elena    Rodríguez    CAR005           DEP005      2000.20      9750       11750.20 2026-11-07 06:55:30+00:00
+[2026-11-07T06:55:31.893Z]  202610            9    Valentina         Ruiz    CAR001           DEP001      4200.50     10200       14400.50 2026-11-07 06:55:30+00:00
+[2026-11-07T06:55:31.893Z]  202610           10    Sebastián       Castro    CAR005           DEP005      1950.40      9000       10950.40 2026-11-07 06:55:30+00:00
+[2026-11-07T06:55:31.893Z]  202610           11      Luciana       Flores    CAR004           DEP004      1850.10     10800       12650.10 2026-11-07 06:55:30+00:00
+[2026-11-07T06:55:31.893Z]  202610           12       Andrés         Soto    CAR002           DEP002      2550.60     10350       12900.60 2026-11-07 06:55:30+00:00
+[2026-11-07T06:55:31.893Z]  202610           13      Mariana        Rojas    CAR003           DEP003      2250.30     11700       13950.30 2026-11-07 06:55:30+00:00
+[2026-11-07T06:55:31.893Z]  202610           14        Diego         Luna    CAR001           DEP001      4100.70      9750       13850.70 2026-11-07 06:55:30+00:00
+[2026-11-07T06:55:31.893Z] 2026-11-07 06:55:31,681 | INFO    | Verificación QA OK
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // withCredentials
+[Pipeline] }
+[Pipeline] // script
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Aprobación automática)
+[Pipeline] script
+[Pipeline] {
+[Pipeline] echo
+[2026-11-07T06:55:32.473Z] Quality gate QA: OK · rama origin/main · aprobado para PRD: true
+[Pipeline] }
+[Pipeline] // script
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (CD · PRD)
+[Pipeline] script
+[Pipeline] {
+[Pipeline] withCredentials
+[2026-11-07T06:55:32.714Z] Masking supported pattern matches of $PG_PASSWORD
+[Pipeline] {
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] sh
+[2026-11-07T06:55:33.734Z] 2026-11-07 06:55:33,732 | INFO    | Contenedor raw-prd ya existe
+[2026-11-07T06:55:33.985Z] 2026-11-07 06:55:33,735 | INFO    | Contenedor lake-prd ya existe
+[2026-11-07T06:55:33.985Z] 2026-11-07 06:55:33,752 | INFO    | Subido ComisionEmpleados_V1_202610.csv -> raw-prd/comisiones/ComisionEmpleados_V1_202610.csv
+[2026-11-07T06:55:34.536Z] 2026-11-07 06:55:34,413 | INFO    | === Pipeline comisiones | env=prd | periodo=202610 ===
+[2026-11-07T06:55:35.881Z] 2026-11-07 06:55:35,834 | INFO    | Extract SQL  : 48 filas de rrhh.empleado
+[2026-11-07T06:55:35.881Z] 2026-11-07 06:55:35,858 | INFO    | Extract Blob : 34 filas de raw-prd/comisiones/ComisionEmpleados_V1_202610.csv
+[2026-11-07T06:55:35.881Z] 2026-11-07 06:55:35,859 | WARNING | IDs del CSV sin empleado en BD (se descartan): [4]
+[2026-11-07T06:55:35.881Z] 2026-11-07 06:55:35,859 | INFO    | Empleados de BD sin comisión en el periodo: [6, 7, 8, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 50]
+[2026-11-07T06:55:35.881Z] 2026-11-07 06:55:35,864 | INFO    | Transform    : 33 filas tras JOIN por empleado_id
+[2026-11-07T06:55:35.881Z] 2026-11-07 06:55:35,866 | INFO    | Quality      : OK (todas las reglas cumplidas)
+[2026-11-07T06:55:36.132Z] 2026-11-07 06:55:35,929 | INFO    | Load Lake    : lake-prd/gold/comisiones/periodo=202610/comisiones_202610.parquet (7760 bytes)
+[2026-11-07T06:55:36.132Z] 2026-11-07 06:55:35,935 | INFO    | Load Lake    : lake-prd/gold/comisiones/periodo=202610/comisiones_202610.xlsx (7182 bytes)
+[2026-11-07T06:55:36.132Z] 2026-11-07 06:55:35,935 | INFO    | Resumen      : salario_total suma 436905.20
+[2026-11-07T06:55:36.683Z] 2026-11-07 06:55:36,651 | INFO    | Parquet lake-prd/gold/comisiones/periodo=202610/comisiones_202610.parquet: 33 filas, 10 columnas
+[2026-11-07T06:55:36.683Z] 2026-11-07 06:55:36,652 | INFO    | Columnas: ['periodo', 'empleado_id', 'nom_empleado', 'ape_empleado', 'cod_cargo', 'cod_departamento', 'mnt_salario', 'comision', 'salario_total', 'fecha_proceso']
+[2026-11-07T06:55:36.683Z] periodo  empleado_id nom_empleado ape_empleado cod_cargo cod_departamento  mnt_salario  comision  salario_total             fecha_proceso
+[2026-11-07T06:55:36.683Z]  202610            1          Ana        Pérez    CAR004           DEP004      1800.00      9000       10800.00 2026-11-07 06:55:35+00:00
+[2026-11-07T06:55:36.683Z]  202610            2       Carlos        López    CAR002           DEP002      2500.50      8250       10750.50 2026-11-07 06:55:35+00:00
+[2026-11-07T06:55:36.683Z]  202610            3        Sofía     Martínez    CAR003           DEP003      2200.75     10500       12700.75 2026-11-07 06:55:35+00:00
+[2026-11-07T06:55:36.683Z]  202610            5        Elena    Rodríguez    CAR005           DEP005      2000.20      9750       11750.20 2026-11-07 06:55:35+00:00
+[2026-11-07T06:55:36.683Z]  202610            9    Valentina         Ruiz    CAR001           DEP001      4200.50     10200       14400.50 2026-11-07 06:55:35+00:00
+[2026-11-07T06:55:36.683Z]  202610           10    Sebastián       Castro    CAR005           DEP005      1950.40      9000       10950.40 2026-11-07 06:55:35+00:00
+[2026-11-07T06:55:36.683Z]  202610           11      Luciana       Flores    CAR004           DEP004      1850.10     10800       12650.10 2026-11-07 06:55:35+00:00
+[2026-11-07T06:55:36.683Z]  202610           12       Andrés         Soto    CAR002           DEP002      2550.60     10350       12900.60 2026-11-07 06:55:35+00:00
+[2026-11-07T06:55:36.683Z]  202610           13      Mariana        Rojas    CAR003           DEP003      2250.30     11700       13950.30 2026-11-07 06:55:35+00:00
+[2026-11-07T06:55:36.683Z]  202610           14        Diego         Luna    CAR001           DEP001      4100.70      9750       13850.70 2026-11-07 06:55:35+00:00
+[2026-11-07T06:55:36.683Z] 2026-11-07 06:55:36,655 | INFO    | Verificación PRD OK
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // withCredentials
+[Pipeline] }
+[Pipeline] // script
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Declarative: Post Actions)
+[Pipeline] archiveArtifacts
+[2026-11-07T06:55:37.462Z] Archiving artifacts
+[Pipeline] sh
+[2026-11-07T06:55:37.751Z] + docker image rm dataops-comisiones:test-3
+[Pipeline] echo
+[2026-11-07T06:55:37.801Z] Pipeline OK: periodo 202610 desplegado en DEV → QA → PRD
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+[Pipeline] // timestamps
+[Pipeline] }
+[Pipeline] // timeout
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // node
+[Pipeline] End of Pipeline
+Finished: SUCCESS

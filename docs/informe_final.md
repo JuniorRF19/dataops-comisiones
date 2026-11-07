@@ -62,7 +62,9 @@ GitHub (main) ──poll──► Jenkins
 | 5 | Ejecución en QA + smoke test | CD | Quality gate OK y Parquet legible | ✅ Verificación QA OK | `logs/deploy_qa.log` |
 | 6 | Aprobación automática + ejecución en PRD | CD | PRD desplegado | ✅ Verificación PRD OK | `logs/deploy_prd.log`, `artifacts/prd/*.parquet` |
 | 7 | Prueba negativa: CSV 209912 con comisión negativa, nula e id duplicado | Calidad | DEV avisa; QA falla; PRD no se ejecuta | ✅ DEV exit 0 con 4 errores reportados; QA exit 2 `QUALITY GATE FALLIDO` | `evidencias/prueba_negativa_quality_gate.log` |
-| 8 | Disparo automático por `git push` (pollSCM) | CI/CD | Nuevo build sin intervención manual | ver captura | `evidencias/` |
+| 8 | Pipeline completo desde GitHub (build #1 de `dataops-comisiones`) | CI/CD | CI + DEV → QA → PRD en verde | ✅ SUCCESS | `evidencias/jenkins_github_build_1_ok_202610.log`, capturas 05–08 |
+| 9 | Prueba negativa en Jenkins desde GitHub (build #2, `PERIODO=209912`) | CI/CD | QA falla y PRD se omite | ✅ FAILURE en QA, PRD omitido | `evidencias/jenkins_github_build_2_fallo_qa_209912.log`, captura 09 |
+| 10 | Disparo automático por `git push` (pollSCM, build #3) | CI/CD | Nuevo build sin intervención manual | ✅ "Started by an SCM change" | `evidencias/jenkins_github_build_3_push.log`, captura 10 |
 
 ## 5. Evidencias
 
@@ -70,15 +72,28 @@ La carpeta `evidencias/` contiene:
 
 - `ejecucion_local_202610.log`: ejecución del pipeline en DEV, QA y PRD, más la verificación del Parquet de PRD.
 - `prueba_negativa_quality_gate.log`: comportamiento del quality gate con datos inválidos.
-- `jenkins_build_3_ok_202610.log`: consola de Jenkins con CI + DEV → QA → PRD en verde.
-- `jenkins_build_4_fallo_qa_209912.log`: consola de Jenkins donde QA bloquea datos inválidos y PRD queda omitido.
-- Capturas de pantalla, que se agregan manualmente:
-  - Stage View del job con todas las etapas en verde;
-  - Test Result (17 tests);
-  - artefactos del build;
-  - build fallido en QA con `PERIODO=209912`;
-  - commits en GitHub;
-  - build disparado por el push.
+- `jenkins_build_3_ok_202610.log` y `jenkins_build_4_fallo_qa_209912.log`: builds de validación previos a GitHub (job local de prueba).
+- `jenkins_github_build_*.log`: consolas de los builds del job `dataops-comisiones` conectado a GitHub.
+
+### Capturas de pantalla (`evidencias/capturas/`)
+
+| # | Archivo | Qué muestra | Dónde |
+|---|---|---|---|
+| 01 | `01_github_repo.png` | Repositorio con README y estructura | https://github.com/JuniorRF19/dataops-comisiones |
+| 02 | `02_github_commits.png` | Historial de commits (Conventional Commits) | …/commits/main |
+| 03 | `03_github_ramas.png` | Ramas `main` y `develop` | …/branches |
+| 04 | `04_jenkins_job_config.png` | Job "Pipeline script from SCM" apuntando a GitHub | http://localhost:8080/job/dataops-comisiones/configure |
+| 05 | `05_jenkins_stage_view.png` | Stage View: #1 verde, #2 rojo en QA, #3 verde | http://localhost:8080/job/dataops-comisiones/ |
+| 06 | `06_jenkins_test_result.png` | 17 tests OK | http://localhost:8080/job/dataops-comisiones/1/testReport/ |
+| 07 | `07_jenkins_consola_prd.png` | Consola: "Verificación PRD OK" y "Finished: SUCCESS" | http://localhost:8080/job/dataops-comisiones/1/console |
+| 08 | `08_jenkins_artefactos.png` | Parquet/Excel y logs por ambiente | http://localhost:8080/job/dataops-comisiones/1/artifact/ |
+| 09 | `09_jenkins_quality_gate_qa.png` | "QUALITY GATE FALLIDO" y PRD omitido | http://localhost:8080/job/dataops-comisiones/2/console |
+| 10 | `10_jenkins_build_por_push.png` | "Started by an SCM change" y cambios del commit | http://localhost:8080/job/dataops-comisiones/3/ |
+| 11 | `11_jenkins_credenciales.png` | Credencial `pg-dmc` (contraseña oculta) | http://localhost:8080/manage/credentials/ |
+| 12 | `12_data_lake_contenido.png` | Contenedores raw/lake por ambiente con el Parquet | terminal: `python scripts/list_lake.py` |
+| 13 | `13_parquet_resultado.png` | Tabla final con `salario_total` | terminal: `python scripts/verify_lake.py --env prd`, o el `.xlsx` del artefacto abierto en Excel |
+| 14 | `14_docker_contenedores.png` | Azurite y Jenkins corriendo | terminal: `docker ps` o Docker Desktop |
+| 15 | `15_pytest_local.png` | Tests en verde en local | terminal: `python -m pytest -v` |
 
 ## 6. Conclusiones
 

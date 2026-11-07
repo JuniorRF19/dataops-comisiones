@@ -1,6 +1,8 @@
 # Informe final · Proyecto DataOps: cálculo de salario total
 
-**Curso:** DE – DataOps (DMC Institute) · **Autor:** Junior Rojas · **Fecha:** octubre 2026
+**Curso:** DE – DataOps (DMC Institute) · **Autor:** Junior Rojas Fernandez · **Fecha:** noviembre 2026
+
+**Repositorio:** https://github.com/JuniorRF19/dataops-comisiones
 
 ## 1. Resumen del proyecto
 
@@ -27,15 +29,16 @@ El flujo se versiona en **Git/GitHub** y se despliega con **Jenkins** a tres amb
 
 ## 2. Arquitectura
 
-```
-GitHub (main) ──poll──► Jenkins
-   CI: checkout → ruff → validar ARM → pytest (17) → docker build
-   CD: DEV (gate no estricto) → QA (gate estricto + smoke test) → aprobación automática → PRD
-        │
-        └─► contenedor dataops-comisiones:<build>
-              PostgreSQL rrhh.empleado ─┐
-              raw-<env>/…/CSV ──────────┴─► JOIN empleado_id ─► quality ─► lake-<env>/gold/comisiones/periodo=AAAAMM/*.parquet
-```
+![Diagrama de arquitectura](diagrama_arquitectura.png)
+
+1. El desarrollador hace `git push` a GitHub.
+2. Jenkins revisa el repositorio cada 2 minutos (pollSCM) y, si hay cambios, ejecuta el `Jenkinsfile`.
+3. **CI:** lint, validación de las plantillas ARM, 17 unit tests y construcción de una imagen Docker inmutable.
+4. **CD:** la misma imagen se ejecuta en DEV, QA y PRD (`docker run --env <env>`). Cada ejecución:
+   - lee `rrhh.empleado` de PostgreSQL y el CSV de `raw-<env>`;
+   - hace el JOIN y aplica el quality gate;
+   - publica el Parquet y el Excel en `lake-<env>`.
+5. **Aprobación automática:** PRD se ejecuta solo si QA pasó el quality gate estricto y el smoke test, y la rama es `main`.
 
 ## 3. Resultados del procesamiento (periodo 202610)
 
@@ -74,26 +77,62 @@ La carpeta `evidencias/` contiene:
 - `prueba_negativa_quality_gate.log`: comportamiento del quality gate con datos inválidos.
 - `jenkins_build_3_ok_202610.log` y `jenkins_build_4_fallo_qa_209912.log`: builds de validación previos a GitHub (job local de prueba).
 - `jenkins_github_build_*.log`: consolas de los builds del job `dataops-comisiones` conectado a GitHub.
+- `resultados/<env>/comisiones_202610.parquet|xlsx`: tablas consolidadas descargadas de los artefactos de Jenkins para DEV, QA y PRD.
 
-### Capturas de pantalla (`evidencias/capturas/`)
+### 5.1 Repositorio Git (GitHub)
 
-| # | Archivo | Qué muestra | Dónde |
-|---|---|---|---|
-| 01 | `01_github_repo.png` | Repositorio con README y estructura | https://github.com/JuniorRF19/dataops-comisiones |
-| 02 | `02_github_commits.png` | Historial de commits (Conventional Commits) | …/commits/main |
-| 03 | `03_github_ramas.png` | Ramas `main` y `develop` | …/branches |
-| 04 | `04_jenkins_job_config.png` | Job "Pipeline script from SCM" apuntando a GitHub | http://localhost:8080/job/dataops-comisiones/configure |
-| 05 | `05_jenkins_stage_view.png` | Stage View: #1 verde, #2 rojo en QA, #3 verde | http://localhost:8080/job/dataops-comisiones/ |
-| 06 | `06_jenkins_test_result.png` | 17 tests OK | http://localhost:8080/job/dataops-comisiones/1/testReport/ |
-| 07 | `07_jenkins_consola_prd.png` | Consola: "Verificación PRD OK" y "Finished: SUCCESS" | http://localhost:8080/job/dataops-comisiones/1/console |
-| 08 | `08_jenkins_artefactos.png` | Parquet/Excel y logs por ambiente | http://localhost:8080/job/dataops-comisiones/1/artifact/ |
-| 09 | `09_jenkins_quality_gate_qa.png` | "QUALITY GATE FALLIDO" y PRD omitido | http://localhost:8080/job/dataops-comisiones/2/console |
-| 10 | `10_jenkins_build_por_push.png` | "Started by an SCM change" y cambios del commit | http://localhost:8080/job/dataops-comisiones/3/ |
-| 11 | `11_jenkins_credenciales.png` | Credencial `pg-dmc` (contraseña oculta) | http://localhost:8080/manage/credentials/ |
-| 12 | `12_data_lake_contenido.png` | Contenedores raw/lake por ambiente con el Parquet | terminal: `python scripts/list_lake.py` |
-| 13 | `13_parquet_resultado.png` | Tabla final con `salario_total` | terminal: `python scripts/verify_lake.py --env prd`, o el `.xlsx` del artefacto abierto en Excel |
-| 14 | `14_docker_contenedores.png` | Azurite y Jenkins corriendo | terminal: `docker ps` o Docker Desktop |
-| 15 | `15_pytest_local.png` | Tests en verde en local | terminal: `python -m pytest -v` |
+**Figura 1.** Repositorio con el código, las plantillas ARM, el README y las evidencias.
+![Repositorio en GitHub](../evidencias/capturas/01_github_repo.png)
+
+**Figura 2.** Historial de commits atómicos con Conventional Commits (`feat`, `test`, `infra`, `ci`, `fix`, `docs`).
+![Commits](../evidencias/capturas/02_github_commits.png)
+
+**Figura 3.** Ramas `main` (desplegable) y `develop` (integración).
+![Ramas](../evidencias/capturas/03_github_ramas.png)
+
+### 5.2 Pipeline CI/CD (Jenkins)
+
+**Figura 4.** El job "Pipeline script from SCM" obtiene el `Jenkinsfile` desde GitHub.
+![Configuración del job](../evidencias/capturas/04_jenkins_job_config.png)
+
+**Figura 5.** Stage View:
+- los builds #1, #3 y #4 completan CI + DEV → QA → aprobación → PRD;
+- el build #2 (datos inválidos) falla en QA y PRD no se despliega.
+
+![Stage View](../evidencias/capturas/05_jenkins_stage_view.png)
+
+**Figura 6.** Resultado de los 17 unit tests publicados con JUnit.
+![Test Result](../evidencias/capturas/06_jenkins_test_result.png)
+
+**Figura 7.** La consola del despliegue en PRD muestra "Verificación PRD OK" y "Finished: SUCCESS".
+![Consola PRD](../evidencias/capturas/07_jenkins_consola_prd.png)
+
+**Figura 8.** Artefactos del build: Parquet/Excel por ambiente, logs de despliegue y reporte de tests.
+![Artefactos](../evidencias/capturas/08_jenkins_artefactos.png)
+
+**Figura 9.** Quality gate de QA con `PERIODO=209912`: 4 reglas incumplidas, `QUALITY GATE FALLIDO` y las etapas de aprobación y PRD omitidas.
+![Quality gate QA](../evidencias/capturas/09_jenkins_quality_gate_qa.png)
+
+**Figura 10.** El build #3 se disparó automáticamente por un `git push` ("Started by an SCM change").
+![Build por push](../evidencias/capturas/10_jenkins_build_por_push.png)
+
+**Figura 11.** La credencial `pg-dmc` se guarda en Jenkins con la contraseña oculta; no está en el repositorio.
+![Credenciales](../evidencias/capturas/11_jenkins_credenciales.png)
+
+### 5.3 Datos y plataforma
+
+**Figura 12.** Contenido del Storage: CSV en `raw-<env>` y Parquet/Excel en `lake-<env>`. Los datos inválidos de 209912 no llegaron a QA ni a PRD.
+![Data Lake](../evidencias/capturas/12_data_lake_contenido.png)
+
+**Figura 13.** Tabla consolidada en PRD con `salario_total = mnt_salario + comision`.
+![Resultado Parquet](../evidencias/capturas/13_parquet_resultado.png)
+
+**Figura 14.** Contenedores de Azurite y Jenkins en ejecución.
+![Docker](../evidencias/capturas/14a_docker_contenedores.png)
+![Docker Desktop](../evidencias/capturas/14b_docker_contenedores.png)
+
+**Figura 15.** Unit tests ejecutados en local con pytest.
+![pytest](../evidencias/capturas/15_pytest_local.png)
 
 ## 6. Conclusiones
 
